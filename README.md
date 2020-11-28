@@ -26,7 +26,7 @@ import  jamf "github.com/DataDog/jamf-api-client-go/classic"
 // default client configuration just pass nil. This will default 
 // to a client that is simply configured with a timeout of 1 minute
 myCustomHTTPClient := &http.Client{
-		Timeout: time.Minute,
+  Timeout: time.Minute,
 }
 
 // Create a client instance to interact with API
