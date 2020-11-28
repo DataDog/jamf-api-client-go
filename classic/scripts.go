@@ -56,9 +56,9 @@ func (j *Client) UpdateScript(identifier interface{}, script *ScriptContents) (*
 		return nil, errors.Wrapf(err, "error building JAMF query request for script: %v", identifier)
 	}
 
-	// handle empty parameters since they can come in as map[string]interface{}
-	// which can not be handled by xml/encoding. The model for this field is poorly
-	// defined so this is a hack around terraform trying to provide an empty map
+	// TODO: Fix hack
+	// handle empty parameters since they can come in as
+	// map[string]interface{} which can not be handled by xml/encoding
 	switch script.Parameters.(type) {
 	case map[string]interface{}:
 		script.Parameters = &ParametersList{}
