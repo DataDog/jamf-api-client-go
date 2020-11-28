@@ -64,7 +64,9 @@ When a release is ready to be pushed:
 - Ensure all intended changes have been merged to `master`
 - Create a release on the releases page.
 - Specify the version you want to release, following [Semantic Versioning](https://semver.org/spec) principles.
+  
   > If the tag isn’t meant for production use, add a pre-release version after the version name. Some good pre-release versions might be v0.2-alpha or v5.9-beta.3. and check the `This is a pre-release` box at the bottom
+
 - Add release title containing the relase version if desired `ex v1.0.0-beta1 Initial Beta Release`
 - Add sufficient changelog contents into the description of the release. (`git log` may be helpful)
 - Create/Publish the release, which will automatically create a tag on the HEAD commit. (no binaries should be uploaded)
@@ -83,7 +85,7 @@ The functionality below represents what the current API client is capable of:
 
   - `/scripts`
     - [x] [Get all scripts](https://www.jamf.com/developers/apis/classic/reference/#/scripts/findScripts)
-    - [x] Get specific script by [ID](https://www.jamf.com/developers/apis/classic/reference/#/scripts/findScriptsById) or [Name](https://www.jamf.com/developers/apis/classic/reference/#/scripts/findScriptsByName) Note: only JSON response available for GET requests (XML Unmarshalling not currently configured)
+    - [x] Get specific script by [ID](https://www.jamf.com/developers/apis/classic/reference/#/scripts/findScriptsById) or [Name](https://www.jamf.com/developers/apis/classic/reference/#/scripts/findScriptsByName) **Note:** only JSON response available for GET requests (XML Unmarshalling not currently configured)
     - [x] Update script by [ID](https://www.jamf.com/developers/apis/classic/reference/#/scripts/updateScriptById) or [Name](https://www.jamf.com/developers/apis/classic/reference/#/scripts/updateScriptByName)
     - [x] Create new script by [ID](https://www.jamf.com/developers/apis/classic/reference/#/scripts/createScriptById) or [Name](https://www.jamf.com/developers/apis/classic/reference/#/scripts/createScriptByName)
     - [x] Delete script by [ID](https://www.jamf.com/developers/apis/classic/reference/#/scripts/deleteScriptById) or [Name](https://www.jamf.com/developers/apis/classic/reference/#/scripts/deleteScriptByName)
