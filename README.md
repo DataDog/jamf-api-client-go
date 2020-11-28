@@ -12,7 +12,7 @@ This repository contains an unoffical Go API client for Jamf REST API's.
 
 The API client remains application in active development.
 
-This is **not** an official [Jamf](https://github.com/jamf) product. This client is **not formally
+This is **not** an official [Jamf](https://github.com/jamf) API client. This client is **not formally
 supported** and the code is available as-is with no guarantees. 
 
 However, [contribution](#developing-and-contribution) is welcome and appreciated! 🚀 💜
