@@ -1,1 +1,90 @@
 # jamf-api-client-go
+
+This repository contains an unoffical Go API client for Jamf REST API's.
+  - [Jamf Classic API](https://www.jamf.com/developers/apis/classic/overview/)
+    - [API Reference](https://www.jamf.com/developers/apis/classic/reference/)
+    - [Code Samples](https://www.jamf.com/developers/apis/classic/code-samples/)
+  - [Jamf Pro API](https://www.jamf.com/developers/apis/jamf-pro/overview/) **(TBD)**
+    - **Note:** Development on the pro client has not been started, if an endpoint is to be added here please keep in mind that the endpoints are prefaced with `v1` per the API Reference below and therfore the file structure should reflect `/pro/v1/*.go`
+    - [API Reference](https://www.jamf.com/developers/apis/jamf-pro/reference/)
+  
+## Disclaimers
+
+The API client remains application in active development.
+
+This is **not** an official [Jamf](https://github.com/jamf) product. This client is **not formally
+supported** and the code is available as-is with no guarantees. 
+
+However, [contribution](#developing-and-contribution) is welcomed and appreciated! 🚀
+## Usage
+
+```go
+import  jamf "github.com/DataDog/jamf-api-client-go/classic"
+
+// You can optionally setup a custom HTTP client to use which can
+// include any settings you desire. If you would like to use the 
+// default client configuration just pass nil. This will default 
+// to a client that is simply configured with a timeout of 1 minute
+myCustomHTTPClient := &http.Client{
+		Timeout: time.Minute,
+}
+
+// Create a client instance to interact with API
+j, err := jamf.NewClient("https://jamf.example.com", "example.username", "super-secret-password", myCustomHTTPClient)
+if err != nil {
+  fmt.Println(err.Error())
+  os.Exit(1)
+}
+
+// Example: Get All Computers
+computers, err := j.Computers()
+if err != nil {
+  fmt.Println(err.Error())
+  os.Exit(1)
+}
+```
+> Note: It is recommended to use Environment variables or a KMS for Jamf credentials
+
+## Developing & Contribution
+
+When building out more API client functionality it's helpful to use the [Postman Collection](https://github.com/jamf/Classic-API-Postman-Collection) provided by Jamf for testing endpoint responses and payloads.
+### How to Contribute
+
+* Fork a repository
+* Add/Fix something
+* Check that tests are passing
+* Create PR
+### Tests
+
+* Unit tests: `go test -v ./...`
+
+## API Coverage
+
+The functionality below represents what the current API client is capable of:
+
+#### Classic
+  - `/computers`
+    - [x] [Get all computers](https://www.jamf.com/developers/apis/classic/reference/#/computers/findComputers)
+    - [x] Get specific computer by [ID](https://www.jamf.com/developers/apis/classic/reference/#/computers/findComputersById) or [Name](https://www.jamf.com/developers/apis/classic/reference/#/computers/findComputersByName)
+    - [x] Update computer by [ID](https://www.jamf.com/developers/apis/classic/reference/#/computers/updateComputerById) or [Name](https://www.jamf.com/developers/apis/classic/reference/#/computers/updateComputerByName)
+
+  - `/scripts`
+    - [x] [Get all scripts](https://www.jamf.com/developers/apis/classic/reference/#/scripts/findScripts)
+    - [x] Get specific script by [ID](https://www.jamf.com/developers/apis/classic/reference/#/scripts/findScriptsById) or [Name](https://www.jamf.com/developers/apis/classic/reference/#/scripts/findScriptsByName)
+          > [Note: only JSON response available for GET requests (XML Unmarshalling not currently configured)]
+    - [x] Update script by [ID](https://www.jamf.com/developers/apis/classic/reference/#/scripts/updateScriptById) or [Name](https://www.jamf.com/developers/apis/classic/reference/#/scripts/updateScriptByName)
+    - [x] Create new script by [ID](https://www.jamf.com/developers/apis/classic/reference/#/scripts/createScriptById) or [Name](https://www.jamf.com/developers/apis/classic/reference/#/scripts/createScriptByName)
+    - [x] Delete script by [ID](https://www.jamf.com/developers/apis/classic/reference/#/scripts/deleteScriptById) or [Name](https://www.jamf.com/developers/apis/classic/reference/#/scripts/deleteScriptByName)
+
+  - `/policies`
+    - [x] [Get all policies](https://www.jamf.com/developers/apis/classic/reference/#/policies/findPolicies)
+    - [x] Get policy by [ID](https://www.jamf.com/developers/apis/classic/reference/#/policies/findPoliciesById) or [Name](https://www.jamf.com/developers/apis/classic/reference/#/policies/findPoliciesByName)
+    - [x] Update policy by [ID](https://www.jamf.com/developers/apis/classic/reference/#/policies/updatePolicyById) or [Name](https://www.jamf.com/developers/apis/classic/reference/#/policies/updatePolicyByName)
+    - [x] Create new policy by [ID](https://www.jamf.com/developers/apis/classic/reference/#/policies/createPolicyById) or [Name](https://www.jamf.com/developers/apis/classic/reference/#/policies/updatePolicyByName)
+    - [x] Delete policy by [ID](https://www.jamf.com/developers/apis/classic/reference/#/policies/deletePolicyById) or [Name](https://www.jamf.com/developers/apis/classic/reference/#/policies/deletePolicyByName)
+
+  - `/osxconfigurationprofiles` **(In Progress)**
+    - [ ] [Get all configuration profiles](https://www.jamf.com/developers/apis/classic/reference/#/osxconfigurationprofiles/findOsxConfigurationProfiles)
+    - [ ] [Get configuration profile by ID or Name](https://www.jamf.com/developers/apis/classic/reference/#/osxconfigurationprofiles/findOsxConfigurationProfilesById)
+    - [ ] [Update configuration profile by ID or Name](https://www.jamf.com/developers/apis/classic/reference/#/osxconfigurationprofiles/updateOsxConfigurationProfileById)
+    - [ ] [Create configuration profile by ID or Name](https://www.jamf.com/developers/apis/classic/reference/#/osxconfigurationprofiles/createOsxConfigurationProfileById)
