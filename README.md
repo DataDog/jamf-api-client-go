@@ -61,7 +61,7 @@ When building out more API client functionality it's helpful to use the [Postman
 ### Releasing
 
 When a release is ready to be pushed:
-- Ensure all intended changes have been merged to `master`
+- Ensure all intended changes have been merged to `main`
 - Create a release on the releases page.
 - Specify the version you want to release, following [Semantic Versioning](https://semver.org/spec) principles.
   
