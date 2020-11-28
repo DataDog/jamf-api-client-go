@@ -15,7 +15,7 @@ The API client remains application in active development.
 This is **not** an official [Jamf](https://github.com/jamf) product. This client is **not formally
 supported** and the code is available as-is with no guarantees. 
 
-However, [contribution](#developing-and-contribution) is welcomed and appreciated! 🚀
+However, [contribution](#developing-and-contribution) is welcome and appreciated! 🚀 💜
 ## Usage
 
 ```go
@@ -48,15 +48,28 @@ if err != nil {
 ## Developing & Contribution
 
 When building out more API client functionality it's helpful to use the [Postman Collection](https://github.com/jamf/Classic-API-Postman-Collection) provided by Jamf for testing endpoint responses and payloads.
+### Tests
+
+* Unit tests: `go test -v ./...`
 ### How to Contribute
 
 * Fork a repository
 * Add/Fix something
 * Check that tests are passing
-* Create PR
-### Tests
+* Create PR against and await review/approval
 
-* Unit tests: `go test -v ./...`
+### Releasing
+
+When a release is ready to be pushed:
+- Ensure all intended changes have been merged to `master`
+- Create a release on the releases page.
+- Specify the version you want to release, following [Semantic Versioning](https://semver.org/spec) principles.
+  > If the tag isn’t meant for production use, add a pre-release version after the version name. Some good pre-release versions might be v0.2-alpha or v5.9-beta.3. and check the `This is a pre-release` box at the bottom
+- Add release title containing the relase version if desired `ex v1.0.0-beta1 Initial Beta Release`
+- Add sufficient changelog contents into the description of the release. (`git log` may be helpful)
+- Create/Publish the release, which will automatically create a tag on the HEAD commit. (no binaries should be uploaded)
+
+Once a versioned package has been released, the contents of that version **MUST NOT** be modified. Any modifications must be released as a new version.
 
 ## API Coverage
 
@@ -70,8 +83,7 @@ The functionality below represents what the current API client is capable of:
 
   - `/scripts`
     - [x] [Get all scripts](https://www.jamf.com/developers/apis/classic/reference/#/scripts/findScripts)
-    - [x] Get specific script by [ID](https://www.jamf.com/developers/apis/classic/reference/#/scripts/findScriptsById) or [Name](https://www.jamf.com/developers/apis/classic/reference/#/scripts/findScriptsByName)
-          > [Note: only JSON response available for GET requests (XML Unmarshalling not currently configured)]
+    - [x] Get specific script by [ID](https://www.jamf.com/developers/apis/classic/reference/#/scripts/findScriptsById) or [Name](https://www.jamf.com/developers/apis/classic/reference/#/scripts/findScriptsByName) Note: only JSON response available for GET requests (XML Unmarshalling not currently configured)
     - [x] Update script by [ID](https://www.jamf.com/developers/apis/classic/reference/#/scripts/updateScriptById) or [Name](https://www.jamf.com/developers/apis/classic/reference/#/scripts/updateScriptByName)
     - [x] Create new script by [ID](https://www.jamf.com/developers/apis/classic/reference/#/scripts/createScriptById) or [Name](https://www.jamf.com/developers/apis/classic/reference/#/scripts/createScriptByName)
     - [x] Delete script by [ID](https://www.jamf.com/developers/apis/classic/reference/#/scripts/deleteScriptById) or [Name](https://www.jamf.com/developers/apis/classic/reference/#/scripts/deleteScriptByName)
