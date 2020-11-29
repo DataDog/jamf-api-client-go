@@ -37,7 +37,21 @@ if err != nil {
 // Example: Get All Computers
 computers, err := j.Computers()
 if err != nil {
-  fmt.Println(err.Error())
+  os.Exit(1)
+}
+
+// Example: Create Script
+newScript := &jamf.ScriptContents{
+  Name: "Script with API Creation",
+}
+s, err := j.CreateScript(newScript)
+if err != nil {
+  os.Exit(1)
+}
+
+// Example: Get Script Details
+scriptDetails, err := j.ScriptDetails(37)
+if err != nil {
   os.Exit(1)
 }
 ```
