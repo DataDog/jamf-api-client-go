@@ -8,12 +8,6 @@ This repository contains an unoffical Go API client for Jamf REST API's.
     - [API Reference](https://www.jamf.com/developers/apis/jamf-pro/reference/)
     - **Note:** Development on the pro client has not been started, if an endpoint is to be added here please keep in mind that the endpoints are prefaced with `v1` per the API Reference below and therfore the file structure should reflect `/pro/v1/*.go`
 
-## Disclaimers
-
-The API client remains application in active development.
-
-This is **not** an official [Jamf](https://github.com/jamf) API client and the client is **not** formally
-supported. The code is available as-is with no guarantees, [contribution](#developing-and-contribution) is welcome and appreciated! 🚀 💜
 ## Usage
 
 ```go
@@ -57,6 +51,12 @@ if err != nil {
 ```
 > Note: It is recommended to use environment variables or a KMS for Jamf credentials
 
+## Disclaimers
+
+The API client remains in active development.
+
+This is **not** an official [Jamf](https://github.com/jamf) API client and the client is **not** formally
+supported. The code is available as-is with no guarantees, [contribution](#developing-and-contribution) is welcome and appreciated! 🚀 💜
 ## Developing & Contribution
 
 When building out more API client functionality it's helpful to use the [Postman Collection](https://github.com/jamf/Classic-API-Postman-Collection) provided by Jamf for testing endpoint responses and payloads.
