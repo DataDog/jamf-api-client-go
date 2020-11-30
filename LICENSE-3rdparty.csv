@@ -1,4 +1,4 @@
 Component,Origin,License,Copyright
 import,https://github.com/sirupsen/logrus,MIT,Copyright (c) 2014 Simon Eskildsen
-import,https://github.com/pkg/errors,BSD-2-Clause,Copyright (c) 2015, Dave Cheney <dave@cheney.net>
-import,github.com/stretchr/testify,MIT,Copyright (c) 2012-2020 Mat Ryer, Tyler Bunnell and contributors.
+import,https://github.com/pkg/errors,BSD-2-Clause,Copyright (c) 2015 Dave Cheney <dave@cheney.net>
+import,github.com/stretchr/testify,MIT,Copyright (c) 2012-2020 Mat Ryer Tyler Bunnell and contributors.
