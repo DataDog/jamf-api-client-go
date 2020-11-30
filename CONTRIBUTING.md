@@ -30,7 +30,7 @@ Github issues are welcome, feel free to submit error reports and feature request
 
 1. Ensure PR template is filled out and all relevant action items in the checklist are covered. PR titles should include one of the following: 
      - `[FEATURE]`   - To be used with new features such as adding a new endpoint
-     - `[BUGFIX]`    - To be used with any bug fixes
+     - `[BUG FIX]`   - To be used with any bug fixes
      - `[REFACTOR]`  - To be used when code change is specific to refactoring and no new features are added
      - `[MISC]`      - To be used with documentation, dependency updates, etc.
   
