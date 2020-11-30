@@ -9,7 +9,7 @@ This repository contains an unoffical Go API client for Jamf REST API's.
     - [API Reference](https://www.jamf.com/developers/apis/jamf-pro/reference/)
     - **Note:** Development on the pro client has not been started, if an endpoint is to be added here please keep in mind that the endpoints are prefaced with `v1` per the API Reference below and therfore the file structure should reflect `/pro/v1/*.go`
 
-To see what functionality is available in the current API client release, please see the [API Coverage](https://github.com/DataDog/jamf-api-client-go/docs/api_coverage.md) doc.
+To see what functionality is available in the current API client release, please see the [API Coverage](https://github.com/DataDog/jamf-api-client-go/blob/main/docs/api_coverage.md) doc.
 ## Disclaimers
 
 The API client remains in active development and there is no affiliation with [Jamf](https://github.com/jamf)
@@ -17,7 +17,7 @@ The API client remains in active development and there is no affiliation with [J
 This is **not** an official [Jamf](https://github.com/jamf) API client and the client is **not** formally
 supported and the code is available as-is.
 
-[Contribution](https://github.com/DataDog/jamf-api-client-go/CONTRIBUTING.md) is welcome and appreciated! 🚀 💜
+[Contribution](https://github.com/DataDog/jamf-api-client-go/blob/main/CONTRIBUTING.md) is welcome and appreciated! 🚀 💜
 ## Usage
 
 ```go
