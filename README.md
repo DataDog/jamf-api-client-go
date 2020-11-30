@@ -8,6 +8,14 @@ This repository contains an unoffical Go API client for Jamf REST API's.
     - [API Reference](https://www.jamf.com/developers/apis/jamf-pro/reference/)
     - **Note:** Development on the pro client has not been started, if an endpoint is to be added here please keep in mind that the endpoints are prefaced with `v1` per the API Reference below and therfore the file structure should reflect `/pro/v1/*.go`
 
+## Disclaimers
+
+The API client remains in active development and there is no affiliation with [Jamf](https://github.com/jamf)
+
+This is **not** an official [Jamf](https://github.com/jamf) API client and the client is **not** formally
+supported and the code is available as-is.
+
+[Contribution](https://github.com/DataDog/jamf-api-client-go/CONTRIBUTING.md) is welcome and appreciated! 🚀 💜
 ## Usage
 
 ```go
@@ -51,25 +59,14 @@ if err != nil {
 ```
 > Note: It is recommended to use environment variables or a KMS for Jamf credentials
 
-## Disclaimers
-
-The API client remains in active development.
-
-This is **not** an official [Jamf](https://github.com/jamf) API client and the client is **not** formally
-supported. The code is available as-is with no guarantees, [contribution](#developing-and-contribution) is welcome and appreciated! 🚀 💜
 ## Developing & Contribution
 
 When building out more API client functionality it's helpful to use the [Postman Collection](https://github.com/jamf/Classic-API-Postman-Collection) provided by Jamf for testing endpoint responses and payloads.
 ### Tests
 
-* Unit tests: `go test -v ./...`
-### How to Contribute
+Unit tests should be added for all endpoints and passing prior to being checked into the `main` branch
 
-* Fork a repository
-* Add/Fix something
-* Check that tests are passing
-* Create PR against and await review/approval
-
+ `go test -v ./...` or `make test`
 ### Releasing
 
 When a release is ready to be pushed:
