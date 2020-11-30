@@ -12,10 +12,9 @@ This repository contains an unoffical Go API client for Jamf REST API's.
 To see what functionality is available in the current API client release, please see the [API Coverage](https://github.com/DataDog/jamf-api-client-go/blob/main/docs/api_coverage.md) doc.
 ## Disclaimers
 
-The API client remains in active development and there is no affiliation with [Jamf](https://github.com/jamf)
-
-This is **not** an official [Jamf](https://github.com/jamf) API client and the client is **not** formally
-supported and the code is available as-is.
+- The API client remains in active development and has no affiliation with [Jamf](https://github.com/jamf)
+- This is **not** an official [Jamf](https://github.com/jamf) API client
+- The client is **not** formally supported by Datadog and the code is available as-is
 
 [Contribution](https://github.com/DataDog/jamf-api-client-go/blob/main/CONTRIBUTING.md) is welcome and appreciated! 🚀 💜
 ## Usage
