@@ -74,7 +74,7 @@ When a release is ready to be pushed:
 - Create a release on the releases page.
 - Specify the version you want to release, following [Semantic Versioning](https://semver.org/spec) principles.
   
-  > If the tag isn’t meant for production use, add a pre-release version after the version name. Some good pre-release versions might be v0.2-alpha or v5.9-beta.3. and check the `This is a pre-release` box at the bottom
+  > If the tag isn’t meant for production use, add a pre-release version after the version name. Some good pre-release versions might be v0.2-alpha or v5.9-beta.3
 
 - Add release title containing the relase version if desired `ex v1.0.0-beta1 Initial Beta Release`
 - Add sufficient changelog contents into the description of the release. (`git log` may be helpful)
