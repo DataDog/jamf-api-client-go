@@ -61,12 +61,9 @@ if err != nil {
 ```
 > Note: It is recommended to use environment variables or a KMS for Jamf credentials
 
-## Developing & Contribution
-
-When building out more API client functionality it's helpful to use the [Postman Collection](https://github.com/jamf/Classic-API-Postman-Collection) provided by Jamf for testing endpoint responses and payloads.
 ### Tests
 
-Unit tests should be added for all endpoints and passing prior to being checked into the `main` branch
+Unit tests should exist for all endpoints and pass successfully prior to being checked into the `main` branch
 
  `go test -v ./...` or `make test`
 ### Releasing
