@@ -12,7 +12,7 @@ This repository contains an unoffical Go API client for Jamf REST API's.
 To see what functionality is available in the current API client release, please see the [API Coverage](https://github.com/DataDog/jamf-api-client-go/blob/main/docs/api_coverage.md) doc.
 ## Disclaimers
 
-- The API client remains in active development and has no affiliation with [Jamf](https://github.com/jamf)
+- The API client remains in active development and has no affiliation to [Jamf](https://github.com/jamf)
 - This is **not** an official [Jamf](https://github.com/jamf) API client
 - The client is **not** formally supported by Datadog and the code is available as-is
 
@@ -31,7 +31,7 @@ myCustomHTTPClient := &http.Client{
 }
 
 // Create a client instance to interact with API
-j, err := jamf.NewClient("https://jamf.example.com", "example.username", "super-secret-password", myCustomHTTPClient)
+j, err := jamf.NewClient("https://jamf.example.com", "YOUR_API_USER", "YOUR_USERS_PASSWORD_HERE", myCustomHTTPClient)
 if err != nil {
   fmt.Println(err.Error())
   os.Exit(1)
@@ -58,8 +58,6 @@ if err != nil {
   os.Exit(1)
 }
 ```
-> Note: It is recommended to use environment variables or a KMS for Jamf credentials
-
 ### Tests
 
 Unit tests should exist for all endpoints and pass successfully prior to being checked into the `main` branch
