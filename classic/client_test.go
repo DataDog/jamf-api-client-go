@@ -66,6 +66,6 @@ func TestBadNewClient(t *testing.T) {
 	defer testServer.Close()
 	j, err := jamf.NewClient(testServer.URL, "", "mock-password-cool", nil)
 	assert.NotNil(t, err)
-	assert.Equal(t, "you must provide a valid Jamf domain, username, and passowrd", err.Error())
+	assert.Equal(t, "you must provide a valid Jamf domain, username, and password", err.Error())
 	assert.Nil(t, j)
 }
