@@ -2,6 +2,11 @@
 # Created by https://www.toptal.com/developers/gitignore/api/vscode,macos,emacs,vim,go,git
 # Edit at https://www.toptal.com/developers/gitignore?templates=vscode,macos,emacs,vim,go,git
 
+### Local files
+.coverage.html
+coverage.html
+cp.out
+
 ### Emacs ###
 # -*- mode: gitignore; -*-
 *~
