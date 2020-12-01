@@ -7,7 +7,7 @@ This repository contains an unoffical Go API client for Jamf REST API's.
     - [Code Samples](https://www.jamf.com/developers/apis/classic/code-samples/)
   - [Jamf Pro API](https://www.jamf.com/developers/apis/jamf-pro/overview/) **(TBD)**
     - [API Reference](https://www.jamf.com/developers/apis/jamf-pro/reference/)
-    - **Note:** Development on the pro client has not been started, if an endpoint is to be added here please keep in mind that the endpoints are prefaced with `v1` per the API Reference below and therfore the file structure should reflect `/pro/v1/*.go`
+    - **Note:** Development on the pro client has not been started, if an work is to be added here please keep in mind that the endpoints are prefaced with `v1` per the API Reference below and therfore the file structure should reflect `/pro/v1/*.go`
 
 To see what functionality is available in the current API client release, please see the [API Coverage](https://github.com/DataDog/jamf-api-client-go/blob/main/docs/api_coverage.md) doc.
 ## Disclaimers
@@ -63,6 +63,9 @@ if err != nil {
 Unit tests should exist for all endpoints and pass successfully prior to being checked into the `main` branch
 
  `go test -v ./...` or `make test`
+
+ Alternatively, `make pr-prep` can be run to execute all tests, formatting, and linting
+
 ### Releasing
 
 When a release is ready to be pushed:

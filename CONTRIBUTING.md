@@ -52,3 +52,5 @@ Github issues are welcome, feel free to submit error reports and feature request
 5. Code formatting and organization is not something worth arguing about. It has value, but not
    nearly enough to justify the time spent. Ensure formatting is consistent and run `go fmt ./...` 
    before requesting a review.
+
+6. To encapsulate all testing and formatting tests please run `make pr-prep` before checking in. 
