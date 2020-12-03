@@ -24,7 +24,7 @@ type ComputerExtenstionAttribute struct {
 	XMLName          xml.Name                        `json:"-" xml:"computer_extension_attribute,omitempty"`
 	ID               int                             `json:"id" xml:"id,omitempty"`
 	Name             string                          `json:"name" xml:"name,omitempty"`
-	Enabled          bool                            `json:"enabled" xml:"enabled,omitempty"`
+	Enabled          bool                            `json:"enabled" xml:"enabled"` // we don't omit since false values are omitted if needed this can be changed to a *bool
 	Description      string                          `json:"description,omitempty" xml:"description,omitempty"`
 	DataType         string                          `json:"data_type,omitempty" xml:"data_type,omitempty"`
 	InputType        *ComputerExtensionAttrInputType `json:"input_type,omitempty" xml:"input_type,omitempty"`
