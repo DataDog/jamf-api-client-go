@@ -1,6 +1,6 @@
 ### Releasing
 
-To prep a new release create a release branch in the format `release/{release number}` and push it to the remote. 
+To prep a new release create a release branch in the format `release-{release number}` and push it to the remote. 
 
 Once the branch is available create a feature branch off of the relase branch, this will allow us to group new functionality together for each release and `main` will always represent the latest official release.
 
