@@ -45,4 +45,7 @@ test-integration:
 	@go test -v -coverprofile=cp.out  -count=1 -timeout 600s ${DIRS}
 	go tool cover -html=cp.out -o .coverage.html
 
-pr-prep: clean fmt lint test-race test-integration
+build:
+	@go build -ldflags="-s -w" -o bin/jamf-api-client-go ./classic
+
+pr-prep: clean deps fmt lint test-race test-integration

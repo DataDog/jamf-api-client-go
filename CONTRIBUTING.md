@@ -24,7 +24,9 @@ Github issues are welcome, feel free to submit error reports and feature request
 - Fork a repository
 - Add new functionality or apply a fix
 - Check that tests are passing
-- Create PR against `main` and await review/approval. Please review the outlined process below to ensure your PR is good to go.
+- Create PR against the latest `release/*` branch (or create one if applicable) and await review/approval.
+
+**Please review the outlined process below to ensure your PR is good to go.**
 
 ## Pull Request Process
 
@@ -36,7 +38,9 @@ Github issues are welcome, feel free to submit error reports and feature request
   
 2. Unless what you are doing is absolutely trivial, add unit tests. Good unit tests come in bundles,
    and usually test for both the expected and how one handles the unexpected case. To ensure your tests 
-   pass please run `go test -v ./...` or `make test` from the root of this repo.
+   pass please run `go test -v ./...` or `make pr-prep` from the root of this repo. We believe that smaller scoped PR's
+   make the review process easier on everyone. Therefore, if you would prefer to submit your tests in a follow up PR please
+   notate that in the description of the PR so the reviewer knows and be a good citizen.
 
 3. If you are making changes that add new components, new data structures, or reorganize an existing
    flow, it is helpful to discuss your architecture first. That discussion is better had over an

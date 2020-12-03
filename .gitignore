@@ -6,6 +6,7 @@
 .coverage.html
 coverage.html
 cp.out
+bin/
 
 ### Emacs ###
 # -*- mode: gitignore; -*-
