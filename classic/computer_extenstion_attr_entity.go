@@ -9,18 +9,18 @@ import (
 	"strings"
 )
 
-// CompterExtensionAttributes represents all attributes that exist in Jamf
-type CompterExtensionAttributes struct {
-	List []ComputerExtenstionAttribute `json:"computer_extension_attributes"`
+// ComputerExtensionAttributes represents all attributes that exist in Jamf
+type ComputerExtensionAttributes struct {
+	List []ComputerExtensionAttribute `json:"computer_extension_attributes"`
 }
 
 // ComputerExtensionAttributeDetails holds the details for a single extension attribute
 type ComputerExtensionAttributeDetails struct {
-	Details ComputerExtenstionAttribute `json:"computer_extension_attribute"`
+	Details ComputerExtensionAttribute `json:"computer_extension_attribute"`
 }
 
-// ComputerExtenstionAttribute represents an extension attribute in Jamf
-type ComputerExtenstionAttribute struct {
+// ComputerExtensionAttribute represents an extension attribute in Jamf
+type ComputerExtensionAttribute struct {
 	XMLName          xml.Name                        `json:"-" xml:"computer_extension_attribute,omitempty"`
 	ID               int                             `json:"id" xml:"id,omitempty"`
 	Name             string                          `json:"name" xml:"name,omitempty"`
@@ -40,7 +40,7 @@ type ComputerExtensionAttrInputType struct {
 }
 
 // ValidateComputerExtensionAttribute orchestrates computer extension content validation
-func ValidateComputerExtensionAttribute(ce *ComputerExtenstionAttribute) error {
+func ValidateComputerExtensionAttribute(ce *ComputerExtensionAttribute) error {
 	if err := ce.ValidateDataType(); err != nil {
 		return err
 	}
@@ -63,7 +63,7 @@ func ValidateComputerExtensionAttribute(ce *ComputerExtenstionAttribute) error {
 }
 
 // ValidateDataType will validate that a computer extension attribute's data type is valid
-func (ce *ComputerExtenstionAttribute) ValidateDataType() error {
+func (ce *ComputerExtensionAttribute) ValidateDataType() error {
 	switch strings.ToLower(ce.DataType) {
 	case "", "string", "integer", "date":
 		return nil
@@ -73,7 +73,7 @@ func (ce *ComputerExtenstionAttribute) ValidateDataType() error {
 }
 
 // ValidateInventoryDisplay will validate that a computer extension attribute's data type is valid
-func (ce *ComputerExtenstionAttribute) ValidateInventoryDisplay() error {
+func (ce *ComputerExtensionAttribute) ValidateInventoryDisplay() error {
 	switch strings.ToLower(ce.InventoryDisplay) {
 	case "", "general", "hardware", "operating system", "user and location", "purchasing", "extension attributes":
 		return nil
@@ -83,7 +83,7 @@ func (ce *ComputerExtenstionAttribute) ValidateInventoryDisplay() error {
 }
 
 // ValidateReconDisplay will validate that a computer extension attribute's data type is valid
-func (ce *ComputerExtenstionAttribute) ValidateReconDisplay() error {
+func (ce *ComputerExtensionAttribute) ValidateReconDisplay() error {
 	switch strings.ToLower(ce.ReconDisplay) {
 	case "", "computer", "user and location", "purchasing", "extension attributes":
 		return nil

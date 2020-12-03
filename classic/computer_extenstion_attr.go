@@ -29,14 +29,14 @@ func (j *Client) ComputerExtensionAttrExists(identifier interface{}) bool {
 }
 
 // ComputerExtensionAttributes returns all computer extension attributes
-func (j *Client) ComputerExtensionAttributes() (*CompterExtensionAttributes, error) {
+func (j *Client) ComputerExtensionAttributes() (*ComputerExtensionAttributes, error) {
 	ep := fmt.Sprintf("%s/%s", j.Endpoint, computerExtAttrContext)
 	req, err := http.NewRequestWithContext(context.Background(), "GET", ep, nil)
 	if err != nil {
 		return nil, errors.Wrap(err, "error building JAMF computer extension attribute query request")
 	}
 
-	res := &CompterExtensionAttributes{}
+	res := &ComputerExtensionAttributes{}
 	if err := j.makeAPIrequest(req, &res); err != nil {
 		return nil, errors.Wrapf(err, "unable to query computer extension attribute from %s", ep)
 	}
@@ -63,7 +63,7 @@ func (j *Client) ComputerExtensionAttributeDetails(identifier interface{}) (*Com
 }
 
 // UpdateComputerExtensionAttribue will update a computer extension attribute in Jamf by either ID or Name
-func (j *Client) UpdateComputerExtensionAttribue(identifier interface{}, content *ComputerExtenstionAttribute) (*ComputerExtenstionAttribute, error) {
+func (j *Client) UpdateComputerExtensionAttribue(identifier interface{}, content *ComputerExtensionAttribute) (*ComputerExtensionAttribute, error) {
 	ep, err := EndpointBuilder(j.Endpoint, computerExtAttrContext, identifier)
 	if err != nil {
 		return nil, errors.Wrapf(err, "error building JAMF query request for computer extension attribute: %v", identifier)
@@ -85,7 +85,7 @@ func (j *Client) UpdateComputerExtensionAttribue(identifier interface{}, content
 		return nil, errors.Wrapf(err, "error building JAMF update request for computer extension attribute: %v (%s)", identifier, ep)
 	}
 
-	res := ComputerExtenstionAttribute{}
+	res := ComputerExtensionAttribute{}
 	if err := j.makeAPIrequest(req, &res); err != nil {
 		return nil, errors.Wrapf(err, "unable to process JAMF update request for computer extension attribute: %v (%s)", identifier, ep)
 	}
@@ -93,8 +93,8 @@ func (j *Client) UpdateComputerExtensionAttribue(identifier interface{}, content
 	return &res, nil
 }
 
-// CreateComputerExtenstionAttribute will create a computer extension attribute in Jamf
-func (j *Client) CreateComputerExtenstionAttribute(content *ComputerExtenstionAttribute) (*ComputerExtenstionAttribute, error) {
+// CreateComputerExtensionAttribute will create a computer extension attribute in Jamf
+func (j *Client) CreateComputerExtensionAttribute(content *ComputerExtensionAttribute) (*ComputerExtensionAttribute, error) {
 	// -1 denotes the next available ID
 	ep, err := EndpointBuilder(j.Endpoint, computerExtAttrContext, -1)
 	if err != nil {
@@ -125,7 +125,7 @@ func (j *Client) CreateComputerExtenstionAttribute(content *ComputerExtenstionAt
 		return nil, errors.Wrapf(err, "error building JAMF creation request for computer extension attribute: %v (%s)", content.Name, ep)
 	}
 
-	res := ComputerExtenstionAttribute{}
+	res := ComputerExtensionAttribute{}
 	if err := j.makeAPIrequest(req, &res); err != nil {
 		return nil, errors.Wrapf(err, "unable to process JAMF creation request for computer extension attribute: %v (%s)", content.Name, ep)
 	}
@@ -133,8 +133,8 @@ func (j *Client) CreateComputerExtenstionAttribute(content *ComputerExtenstionAt
 	return &res, nil
 }
 
-// DeleteComputerExtenstionAttribute will delete a computer extension attribute by either ID or Name
-func (j *Client) DeleteComputerExtenstionAttribute(identifier interface{}) (*ComputerExtenstionAttribute, error) {
+// DeleteComputerExtensionAttribute will delete a computer extension attribute by either ID or Name
+func (j *Client) DeleteComputerExtensionAttribute(identifier interface{}) (*ComputerExtensionAttribute, error) {
 	ep, err := EndpointBuilder(j.Endpoint, computerExtAttrContext, identifier)
 	if err != nil {
 		return nil, errors.Wrapf(err, "error building JAMF query request for computer extension attribute: %v", identifier)
@@ -145,7 +145,7 @@ func (j *Client) DeleteComputerExtenstionAttribute(identifier interface{}) (*Com
 		return nil, errors.Wrapf(err, "error building JAMF deletion request for computer extension attribute: %v (%s)", identifier, ep)
 	}
 
-	res := ComputerExtenstionAttribute{}
+	res := ComputerExtensionAttribute{}
 	if err := j.makeAPIrequest(req, &res); err != nil {
 		return nil, errors.Wrapf(err, "unable to process JAMF deletion request for computer extension attribute: %v (%s)", identifier, ep)
 	}

@@ -45,7 +45,7 @@ func computerExtResponseMocks(t *testing.T) *httptest.Server {
 				if err != nil {
 					fmt.Fprintf(w, err.Error())
 				}
-				compExtAttrContents := &jamf.ComputerExtenstionAttribute{}
+				compExtAttrContents := &jamf.ComputerExtensionAttribute{}
 				err = xml.Unmarshal(data, compExtAttrContents)
 				if err != nil {
 					fmt.Fprintf(w, err.Error())
@@ -56,7 +56,7 @@ func computerExtResponseMocks(t *testing.T) *httptest.Server {
 				}
 				fmt.Fprintf(w, string(compExtData))
 			default:
-				mockCompExtAttr := &jamf.ComputerExtenstionAttribute{
+				mockCompExtAttr := &jamf.ComputerExtensionAttribute{
 					ID:          33,
 					Name:        "Check Firewall",
 					Enabled:     true,

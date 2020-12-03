@@ -62,7 +62,7 @@ func main() {
 	*/
 
 	// update existing computer extension attribute
-	updatedDetails := &jamf.ComputerExtenstionAttribute{
+	updatedDetails := &jamf.ComputerExtensionAttribute{
 		Description: "This is an example of a description update",
 	}
 	updatedCompExtAttr, err := j.UpdateComputerExtensionAttribue(12, updatedDetails)
@@ -75,7 +75,7 @@ func main() {
 	*/
 
 	// create new computer extnesion attribute
-	newExtAttr := &jamf.ComputerExtenstionAttribute{
+	newExtAttr := &jamf.ComputerExtensionAttribute{
 		Name:        "Test Extension Attribute for API",
 		Enabled:     false,
 		Description: "This is testing the Jamf Go API Client",
@@ -89,7 +89,7 @@ func main() {
 		ReconDisplay:     "Extension Attributes",
 	}
 
-	created, err := j.CreateComputerExtenstionAttribute(newExtAttr)
+	created, err := j.CreateComputerExtensionAttribute(newExtAttr)
 	checkAndHandleErr(err)
 	fmt.Printf("Created %s - ID: %d\n\n", created.Name, created.ID)
 	/*
@@ -114,7 +114,7 @@ func main() {
 	// Note if you run this example the server can't find the new ID right away
 	// so we sleep for 30 seconds
 	time.Sleep(30 * time.Second)
-	deleted, err := j.DeleteComputerExtenstionAttribute(created.ID) // Can delete using ID or Name
+	deleted, err := j.DeleteComputerExtensionAttribute(created.ID) // Can delete using ID or Name
 	checkAndHandleErr(err)
 	fmt.Printf("Deleted ID: %d\n", deleted.ID)
 
