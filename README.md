@@ -58,6 +58,8 @@ if err != nil {
   os.Exit(1)
 }
 ```
+
+More examples available [here](https://github.com/DataDog/jamf-api-client-go/tree/main/examples)
 ### Tests
 
 Unit tests should exist for all endpoints and pass successfully prior to being checked into the `main` branch
@@ -65,18 +67,3 @@ Unit tests should exist for all endpoints and pass successfully prior to being c
  `go test -v ./...` or `make test`
 
  Alternatively, `make pr-prep` can be run to execute all tests, formatting, and linting
-
-### Releasing
-
-When a release is ready to be pushed:
-- Ensure all intended changes have been merged to `main`
-- Create a release on the releases page.
-- Specify the version you want to release, following [Semantic Versioning](https://semver.org/spec) principles.
-  
-  > If the tag isn’t meant for production use, add a pre-release version after the version name. Some good pre-release versions might be v0.2-alpha or v5.9-beta.3
-
-- Add release title containing the relase version if desired `ex v1.0.0-beta1 Initial Beta Release`
-- Add sufficient changelog contents into the description of the release. (`git log` may be helpful)
-- Create/Publish the release, which will automatically create a tag on the HEAD commit. (no binaries should be uploaded)
-
-Once a versioned package has been released, the contents of that version **MUST NOT** be modified. Any modifications must be released as a new version.
