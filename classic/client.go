@@ -17,9 +17,10 @@ import (
 )
 
 const (
-	scriptsContext   = "scripts"
-	computersContext = "computers"
-	policiesContext  = "policies"
+	scriptsContext         = "scripts"
+	computersContext       = "computers"
+	computerExtAttrContext = "computerextensionattributes"
+	policiesContext        = "policies"
 )
 
 // Client represents the interface used to communicate with
@@ -43,7 +44,7 @@ func defaultHTTPClient() *http.Client {
 // NewClient returns a new Jamf HTTP client to be used for API requests
 func NewClient(domain string, username string, password string, client *http.Client) (*Client, error) {
 	if domain == "" || username == "" || password == "" {
-		return nil, errors.New("you must provide a valid Jamf domain, username, and passowrd")
+		return nil, errors.New("you must provide a valid Jamf domain, username, and password")
 	}
 
 	if client == nil {

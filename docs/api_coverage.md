@@ -4,6 +4,13 @@
     - [x] Get specific computer by [ID](https://www.jamf.com/developers/apis/classic/reference/#/computers/findComputersById) or [Name](https://www.jamf.com/developers/apis/classic/reference/#/computers/findComputersByName)
     - [x] Update computer by [ID](https://www.jamf.com/developers/apis/classic/reference/#/computers/updateComputerById) or [Name](https://www.jamf.com/developers/apis/classic/reference/#/computers/updateComputerByName)
 
+  - `/computerextensionattributes`
+    - [x] [Get all computer extension attributes](https://www.jamf.com/developers/apis/classic/reference/#/computerextensionattributes/Computerextensionattributes)
+    - [x] Get specific computer extension attribute by [ID](https://www.jamf.com/developers/apis/classic/reference/#/computerextensionattributes/findComputerextensionattributeById) or [Name](https://www.jamf.com/developers/apis/classic/reference/#/computerextensionattributes/findComputerextensionattributeByName)
+    - [x] Create new computer extension attribute by [ID](https://www.jamf.com/developers/apis/classic/reference/#/policies/createComputerextensionattributeById) 
+    - [x] Update computer extension attribute by [ID](https://www.jamf.com/developers/apis/classic/reference/#/computerextensionattributes/updateComputerextensionattributeById) or [Name](https://www.jamf.com/developers/apis/classic/reference/#/computerextensionattributes/updateComputerextensionattributeByName)
+    - [x] Delete computer extensio nattribute by [ID](https://www.jamf.com/developers/apis/classic/reference/#/computerextensionattributes/deleteComputerextensionattributeById) or [Name](https://www.jamf.com/developers/apis/classic/reference/#/computerextensionattributes/deleteComputerextensionattributeByName)
+
   - `/scripts`
     - [x] [Get all scripts](https://www.jamf.com/developers/apis/classic/reference/#/scripts/findScripts)
     - [x] Get specific script by [ID](https://www.jamf.com/developers/apis/classic/reference/#/scripts/findScriptsById) or [Name](https://www.jamf.com/developers/apis/classic/reference/#/scripts/findScriptsByName) **Note:** only JSON response available for GET requests (XML Unmarshalling not currently configured)
