@@ -97,7 +97,7 @@ func main() {
 		    "computer_extension_attribute": {
 		        "id": 21,
 		        "name": "Test Extension Attribute for API",
-		        "enabled": true,
+		        "enabled": false,
 		        "description": "This is testing the Jamf Go API Client",
 		        "data_type": "String",
 		        "input_type": {

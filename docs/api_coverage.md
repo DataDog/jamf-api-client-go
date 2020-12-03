@@ -7,6 +7,7 @@
   - `/computerextensionattributes`
     - [x] [Get all computer extension attributes](https://www.jamf.com/developers/apis/classic/reference/#/computerextensionattributes/Computerextensionattributes)
     - [x] Get specific computer extension attribute by [ID](https://www.jamf.com/developers/apis/classic/reference/#/computerextensionattributes/findComputerextensionattributeById) or [Name](https://www.jamf.com/developers/apis/classic/reference/#/computerextensionattributes/findComputerextensionattributeByName)
+    - [x] Create new computer extension attribute by [ID](https://www.jamf.com/developers/apis/classic/reference/#/policies/createComputerextensionattributeById) 
     - [x] Update computer extension attribute by [ID](https://www.jamf.com/developers/apis/classic/reference/#/computerextensionattributes/updateComputerextensionattributeById) or [Name](https://www.jamf.com/developers/apis/classic/reference/#/computerextensionattributes/updateComputerextensionattributeByName)
     - [x] Delete computer extensio nattribute by [ID](https://www.jamf.com/developers/apis/classic/reference/#/computerextensionattributes/deleteComputerextensionattributeById) or [Name](https://www.jamf.com/developers/apis/classic/reference/#/computerextensionattributes/deleteComputerextensionattributeByName)
 
