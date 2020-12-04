@@ -16,7 +16,7 @@ type ComputerExtensionAttributes struct {
 
 // ComputerExtensionAttributeDetails holds the details for a single extension attribute
 type ComputerExtensionAttributeDetails struct {
-	Details ComputerExtensionAttribute `json:"computer_extension_attribute"`
+	Details *ComputerExtensionAttribute `json:"computer_extension_attribute"`
 }
 
 // ComputerExtensionAttribute represents an extension attribute in Jamf

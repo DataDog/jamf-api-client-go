@@ -78,9 +78,21 @@ func scriptsResponseMocks(t *testing.T) *httptest.Server {
 						EncodedContents: "IyEvYmluL2Jhc2gKI0dlQ==",
 					},
 				}
-				scriptData, err := json.MarshalIndent(mockScript, "", "    ")
-				if err != nil {
-					fmt.Fprintf(w, err.Error())
+				var (
+					scriptData []byte
+					err        error
+				)
+
+				if r.Method == "DELETE" {
+					scriptData, err = json.MarshalIndent(mockScript.Content, "", "    ")
+					if err != nil {
+						fmt.Fprintf(w, err.Error())
+					}
+				} else {
+					scriptData, err = json.MarshalIndent(mockScript, "", "    ")
+					if err != nil {
+						fmt.Fprintf(w, err.Error())
+					}
 				}
 				fmt.Fprintf(w, string(scriptData))
 			}
@@ -181,7 +193,7 @@ func TestCreateScriptRequiredContent(t *testing.T) {
 	assert.Contains(t, contentErr.Error(), "Script contents required")
 }
 
-func DeleteScript(t *testing.T) {
+func TestDeleteScript(t *testing.T) {
 	testServer := scriptsResponseMocks(t)
 	defer testServer.Close()
 	j, err := jamf.NewClient(testServer.URL, "fake-username", "mock-password-cool", nil)
