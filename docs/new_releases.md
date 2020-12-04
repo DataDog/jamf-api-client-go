@@ -1,11 +1,11 @@
 ### Releasing
 
-To prep a new release create a release branch in the format `release/{release number}` and push it to the remote. 
+To prep a new release create a release branch in the format `release-{release number}` and push it to the remote. 
 
 Once the branch is available create a feature branch off of the relase branch, this will allow us to group new functionality together for each release and `main` will always represent the latest official release.
 
 When a release is ready to be pushed:
-- Ensure all intended changes have been merged into the release branch and all tests are passing
+- Create a PR between the release branch and `main` and ensure all intended changes have been merged into the release branch and all tests are passing, at this point all changes should have been previously reviewed and will just need a once over before making the release official. Only admins will be allowed to push changes directly to a release branch as they should not change once the PR is open.
 - Merge the release branch into `main`
 - Create a release on the releases page.
 - Specify the version you want to release, following [Semantic Versioning](https://semver.org/spec) principles.

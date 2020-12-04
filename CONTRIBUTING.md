@@ -24,7 +24,7 @@ Github issues are welcome, feel free to submit error reports and feature request
 - Fork a repository
 - Add new functionality or apply a fix
 - Check that tests are passing
-- Create PR against the latest `release/*` branch (or create one if applicable) and await review/approval.
+- Create PR against the latest `release-*` branch (or create one if applicable) and await review/approval.
 
 **Please review the outlined process below to ensure your PR is good to go.**
 
