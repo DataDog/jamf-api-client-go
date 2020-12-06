@@ -5,9 +5,9 @@ package classic
 
 import "encoding/xml"
 
-// ScriptsList holds a list of all the scripts available in Jamf
-type ScriptsList struct {
-	Scripts []BasicScriptInfo `json:"scripts"`
+// Scripts holds a list of all the scripts available in Jamf
+type Scripts struct {
+	List []BasicScriptInfo `json:"scripts"`
 }
 
 // BasicScriptInfo holds the most basic information about the scripts available in Jamf

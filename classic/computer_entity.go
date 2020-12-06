@@ -5,9 +5,9 @@ package classic
 
 import "encoding/xml"
 
-// ComputerList represents a list of computers enrolled in Jamf
-type ComputerList struct {
-	Computers []BasicComputerInfo `json:"computers"`
+// Computers represents a list of computers enrolled in Jamf
+type Computers struct {
+	List []BasicComputerInfo `json:"computers"`
 }
 
 // ComputerGroup represents a group a device is a member of in Jamf

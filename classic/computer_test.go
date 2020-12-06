@@ -168,10 +168,10 @@ func TestQueryComputer(t *testing.T) {
 	assert.Nil(t, err)
 	computers, err := j.Computers()
 	assert.Nil(t, err)
-	assert.NotNil(t, computers.Computers)
-	assert.Equal(t, 6, len(computers.Computers))
-	assert.Equal(t, 3, computers.Computers[0].ID)
-	assert.Equal(t, "Test MacBook #3", computers.Computers[0].Name)
+	assert.NotNil(t, computers)
+	assert.Equal(t, 6, len(computers))
+	assert.Equal(t, 3, computers[0].ID)
+	assert.Equal(t, "Test MacBook #3", computers[0].Name)
 }
 
 func TestQuerySpecificComputer(t *testing.T) {

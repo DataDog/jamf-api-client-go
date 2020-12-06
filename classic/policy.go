@@ -14,17 +14,17 @@ import (
 )
 
 // Policies returns a list of policies available in the jamf client
-func (j *Client) Policies() (*PolicyList, error) {
+func (j *Client) Policies() ([]BasicPolicyInformation, error) {
 	ep := fmt.Sprintf("%s/%s", j.Endpoint, policiesContext)
 	req, err := http.NewRequestWithContext(context.Background(), "GET", ep, nil)
 	if err != nil {
 		return nil, errors.Wrap(err, "error building Jamf policies query request")
 	}
-	res := PolicyList{}
+	res := Policies{}
 	if err := j.makeAPIrequest(req, &res); err != nil {
 		return nil, errors.Wrapf(err, "unable to query available policies from %s", ep)
 	}
-	return &res, nil
+	return res.List, nil
 }
 
 // PolicyDetails returns the details for a specific policy given its ID or Name
