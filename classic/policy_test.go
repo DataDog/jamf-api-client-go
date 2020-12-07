@@ -98,10 +98,10 @@ func TestGetAllPolicies(t *testing.T) {
 	assert.Nil(t, err)
 	res, err := j.Policies()
 	assert.Nil(t, err)
-	assert.NotNil(t, res.Policies)
-	assert.Len(t, res.Policies, 5)
-	assert.Equal(t, 72, res.Policies[2].ID)
-	assert.Equal(t, "Test Policy", res.Policies[2].Name)
+	assert.NotNil(t, res)
+	assert.Len(t, res, 5)
+	assert.Equal(t, 72, res[2].ID)
+	assert.Equal(t, "Test Policy", res[2].Name)
 }
 
 func TestGetSpecificPolicyByID(t *testing.T) {

@@ -14,17 +14,17 @@ import (
 )
 
 // Scripts returns a list of scripts available in the jamf client
-func (j *Client) Scripts() (*ScriptsList, error) {
+func (j *Client) Scripts() ([]BasicScriptInfo, error) {
 	ep := fmt.Sprintf("%s/%s", j.Endpoint, scriptsContext)
 	req, err := http.NewRequestWithContext(context.Background(), "GET", ep, nil)
 	if err != nil {
 		return nil, errors.Wrap(err, "error building JAMF scripts query request")
 	}
-	res := ScriptsList{}
+	res := Scripts{}
 	if err := j.makeAPIrequest(req, &res); err != nil {
 		return nil, errors.Wrapf(err, "unable to query available scripts from %s", ep)
 	}
-	return &res, nil
+	return res.List, nil
 }
 
 // ScriptDetails returns the details for a specific script given its ID or Name
