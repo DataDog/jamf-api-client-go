@@ -28,7 +28,7 @@ func main() {
 	extAttrs, err := j.ComputerExtensionAttributes()
 	checkAndHandleErr(err)
 
-	for _, attr := range extAttrs.List[:len(extAttrs.List)/3] {
+	for _, attr := range extAttrs[:len(extAttrs)/3] {
 		fmt.Printf("Extension Attribute: %s\n", attr.Name)
 	}
 	fmt.Printf("\n")

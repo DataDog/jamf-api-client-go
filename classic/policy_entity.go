@@ -5,9 +5,9 @@ package classic
 
 import "encoding/xml"
 
-// PolicyList holds all policies in the configured Jamf environment
-type PolicyList struct {
-	Policies []BasicPolicyInformation `json:"policies"`
+// Policies holds all policies in the configured Jamf environment
+type Policies struct {
+	List []BasicPolicyInformation `json:"policies"`
 }
 
 // BasicPolicyInformation holds the basic information for all policies in Jamf

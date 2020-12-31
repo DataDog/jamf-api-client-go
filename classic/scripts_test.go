@@ -112,10 +112,10 @@ func TestGetAllScripts(t *testing.T) {
 	assert.Nil(t, err)
 	scripts, err := j.Scripts()
 	assert.Nil(t, err)
-	assert.NotNil(t, scripts.Scripts)
-	assert.Len(t, scripts.Scripts, 6)
-	assert.Equal(t, 33, scripts.Scripts[2].ID)
-	assert.Equal(t, "Zoom Script 2", scripts.Scripts[2].Name)
+	assert.NotNil(t, scripts)
+	assert.Len(t, scripts, 6)
+	assert.Equal(t, 33, scripts[2].ID)
+	assert.Equal(t, "Zoom Script 2", scripts[2].Name)
 }
 
 func TestGetSpecificScriptByID(t *testing.T) {

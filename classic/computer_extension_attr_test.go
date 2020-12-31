@@ -106,10 +106,10 @@ func TestQueryAllComputerExtAttrs(t *testing.T) {
 	assert.Nil(t, err)
 	compExtAttrs, err := j.ComputerExtensionAttributes()
 	assert.Nil(t, err)
-	assert.NotNil(t, compExtAttrs.List)
-	assert.Equal(t, 3, len(compExtAttrs.List))
-	assert.Equal(t, 99, compExtAttrs.List[1].ID)
-	assert.Equal(t, "Is Logged In User Admin", compExtAttrs.List[1].Name)
+	assert.NotNil(t, compExtAttrs)
+	assert.Equal(t, 3, len(compExtAttrs))
+	assert.Equal(t, 99, compExtAttrs[1].ID)
+	assert.Equal(t, "Is Logged In User Admin", compExtAttrs[1].Name)
 }
 
 func TestQuerySpecificComputerExtAttrByName(t *testing.T) {

@@ -12,18 +12,18 @@ import (
 )
 
 // Computers returns all enrolled computer devices
-func (j *Client) Computers() (*ComputerList, error) {
+func (j *Client) Computers() ([]BasicComputerInfo, error) {
 	ep := fmt.Sprintf("%s/%s", j.Endpoint, computersContext)
 	req, err := http.NewRequestWithContext(context.Background(), "GET", ep, nil)
 	if err != nil {
 		return nil, errors.Wrap(err, "error building JAMF computer query request")
 	}
 
-	res := &ComputerList{}
+	res := &Computers{}
 	if err := j.makeAPIrequest(req, &res); err != nil {
 		return nil, errors.Wrapf(err, "unable to query enrolled computers from %s", ep)
 	}
-	return res, nil
+	return res.List, nil
 }
 
 // ComputerDetails returns the details for a specific computer given its ID

@@ -29,7 +29,7 @@ func (j *Client) ComputerExtensionAttrExists(identifier interface{}) bool {
 }
 
 // ComputerExtensionAttributes returns all computer extension attributes
-func (j *Client) ComputerExtensionAttributes() (*ComputerExtensionAttributes, error) {
+func (j *Client) ComputerExtensionAttributes() ([]ComputerExtensionAttribute, error) {
 	ep := fmt.Sprintf("%s/%s", j.Endpoint, computerExtAttrContext)
 	req, err := http.NewRequestWithContext(context.Background(), "GET", ep, nil)
 	if err != nil {
@@ -40,7 +40,7 @@ func (j *Client) ComputerExtensionAttributes() (*ComputerExtensionAttributes, er
 	if err := j.makeAPIrequest(req, &res); err != nil {
 		return nil, errors.Wrapf(err, "unable to query computer extension attribute from %s", ep)
 	}
-	return res, nil
+	return res.List, nil
 }
 
 // ComputerExtensionAttributeDetails returns the details for a specific computer extension attribute given its ID or Name
