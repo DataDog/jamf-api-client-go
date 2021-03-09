@@ -32,7 +32,7 @@ type ScriptContents struct {
 	Notes           string      `json:"notes" xml:"notes,omitempty"`
 	Priority        string      `json:"priority" xml:"priority,omitempty"`
 	Parameters      interface{} `json:"parameters" xml:"parameters,omitempty"`
-	Requirements    string      `json:"os_requirements" xml:"os_requirements,omitempty"`
+	Requirements    string      `json:"os_requirements" xml:"os_requirements"`
 	Contents        string      `json:"script_contents" xml:"script_contents,omitempty"`
 	EncodedContents string      `json:"script_contents_encoded" xml:"script_contents_encoded,omitempty"`
 }
