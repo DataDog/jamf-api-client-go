@@ -62,7 +62,9 @@ func computerResponseMocks(t *testing.T) *httptest.Server {
 						"jamf_version": "20.18.0-t0000000000",
 						"platform": "Mac",
 						"mdm_capable": false,
-						"report_date": "2020-09-11 23:06:00"
+						"report_date": "2020-09-11 23:06:00",
+						"ip_address": "192.0.2.100",
+						"last_reported_ip": "192.0.2.101"
 					},
 					"location": {
 						"username": "test.user",
@@ -223,6 +225,8 @@ func TestQuerySpecificComputer(t *testing.T) {
 	assert.Equal(t, 82, computer.Info.General.ID)
 	assert.Equal(t, "Go Client Test Machine", computer.Info.General.Name)
 	assert.Equal(t, false, computer.Info.General.MDMCapable)
+	assert.Equal(t, "192.0.2.100", computer.Info.General.IPAddress)
+	assert.Equal(t, "192.0.2.101", computer.Info.General.LastReportedIP)
 
 	// User & Location Info
 	assert.Equal(t, "Test User", computer.Info.UserLocation.RealName)
