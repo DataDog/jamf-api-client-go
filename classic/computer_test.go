@@ -64,7 +64,8 @@ func computerResponseMocks(t *testing.T) *httptest.Server {
 						"mdm_capable": false,
 						"report_date": "2020-09-11 23:06:00",
 						"ip_address": "192.0.2.100",
-						"last_reported_ip": "192.0.2.101"
+						"last_reported_ip": "192.0.2.101",
+						"last_enrolled_date_utc": "2022-06-01T21:58:48.585+0000"
 					},
 					"location": {
 						"username": "test.user",
@@ -227,6 +228,7 @@ func TestQuerySpecificComputer(t *testing.T) {
 	assert.Equal(t, false, computer.Info.General.MDMCapable)
 	assert.Equal(t, "192.0.2.100", computer.Info.General.IPAddress)
 	assert.Equal(t, "192.0.2.101", computer.Info.General.LastReportedIP)
+	assert.Equal(t, "2022-06-01T21:58:48.585+0000", computer.Info.General.LastEnrolledDateUTC)
 
 	// User & Location Info
 	assert.Equal(t, "Test User", computer.Info.UserLocation.RealName)
