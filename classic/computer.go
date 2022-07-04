@@ -11,6 +11,29 @@ import (
 	"github.com/pkg/errors"
 )
 
+// GetComputerOptions include the searchable computer identifiers
+type GetComputerOptions struct {
+	ID           string
+	Name         string
+	SerialNumber string
+}
+
+func (opts *GetComputerOptions) endpoint(endpoint string, context string) string {
+	var (
+		entity string
+		param  string
+	)
+	switch {
+	case opts.ID != "":
+		entity, param = "id", opts.ID
+	case opts.Name != "":
+		entity, param = "name", opts.Name
+	case opts.SerialNumber != "":
+		entity, param = "serialnumber", opts.SerialNumber
+	}
+	return fmt.Sprintf("%s/%s/%s/%s", endpoint, context, entity, param)
+}
+
 // Computers returns all enrolled computer devices
 func (j *Client) Computers() ([]BasicComputerInfo, error) {
 	ep := fmt.Sprintf("%s/%s", j.Endpoint, computersContext)
@@ -41,5 +64,21 @@ func (j *Client) ComputerDetails(identifier interface{}) (*Computer, error) {
 	if err := j.makeAPIrequest(req, &res); err != nil {
 		return nil, errors.Wrapf(err, "unable to query enrolled computer for computer: %v (%s)", identifier, ep)
 	}
+	return res, nil
+}
+
+// GetComputer takes in a search option and returns the details for a specific computer
+func (j *Client) GetComputer(opts *GetComputerOptions) (*Computer, error) {
+	ep := opts.endpoint(j.Endpoint, computersContext)
+	req, err := http.NewRequestWithContext(context.Background(), "GET", ep, nil)
+	if err != nil {
+		return nil, errors.Wrapf(err, "error building JAMF computer request for computer: %s", ep)
+	}
+
+	res := &Computer{}
+	if err := j.makeAPIrequest(req, &res); err != nil {
+		return nil, errors.Wrapf(err, "unable to query enrolled computer for computer: %s", ep)
+	}
+
 	return res, nil
 }
