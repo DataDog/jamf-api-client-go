@@ -153,6 +153,22 @@ func computerResponseMocks(t *testing.T) *httptest.Server {
 						}]
 				}
 			}`)
+		case fmt.Sprintf("%s/serialnumber/VM0L+J/0cr+l", COMPUTER_API_BASE_ENDPOINT):
+			fmt.Fprintf(w, `{
+				"computer": {
+					"general": {
+						"id": 82,
+						"name": "Test Machine (Serial Number)",
+						"mac_address": "00:00:00:A0:FE:00",
+						"serial_number": "VM0L+J/0cr+l",
+						"udid": "000DF0BF-00FF-D00B-FA00-000F0DA0FE00",
+						"jamf_version": "20.18.0-t0000000000",
+						"platform": "Mac",
+						"mdm_capable": false,
+						"report_date": "2020-09-11 23:06:00"
+					}
+				}
+			}`)
 		default:
 			http.Error(w, fmt.Sprintf("bad Jamf computer API call to %s", r.URL), http.StatusInternalServerError)
 			return
@@ -222,7 +238,7 @@ func TestQuerySpecificComputer(t *testing.T) {
 	assert.Equal(t, false, computer.Info.ConfigProfiles[0].Removable)
 }
 
-func TestGetComputer(t *testing.T) {
+func TestGetComputer__ID(t *testing.T) {
 	testServer := computerResponseMocks(t)
 	defer testServer.Close()
 	j, err := jamf.NewClient(testServer.URL, "fake-username", "mock-password-cool", nil)
@@ -236,4 +252,21 @@ func TestGetComputer(t *testing.T) {
 	assert.Nil(t, err)
 	// General Info
 	assert.Equal(t, 82, computer.Info.General.ID)
+}
+
+func TestGetComputer__SerialNumber(t *testing.T) {
+	testServer := computerResponseMocks(t)
+	defer testServer.Close()
+	j, err := jamf.NewClient(testServer.URL, "fake-username", "mock-password-cool", nil)
+	assert.Nil(t, err)
+
+	opts := &jamf.GetComputerOptions{
+		SerialNumber: "VM0L+J/0cr+l",
+	}
+
+	computer, err := j.GetComputer(opts)
+	assert.Nil(t, err)
+	// General Info
+	assert.Equal(t, 82, computer.Info.General.ID)
+	assert.Equal(t, "Test Machine (Serial Number)", computer.Info.General.Name)
 }
