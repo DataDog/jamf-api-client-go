@@ -7,6 +7,7 @@
 coverage.html
 cp.out
 bin/
+.vscode/
 
 ### Emacs ###
 # -*- mode: gitignore; -*-

@@ -161,7 +161,7 @@ func computerResponseMocks(t *testing.T) *httptest.Server {
 		assert.Nil(t, err)
 	}))
 }
-func TestQueryComputer(t *testing.T) {
+func TestListComputers(t *testing.T) {
 	testServer := computerResponseMocks(t)
 	defer testServer.Close()
 	j, err := jamf.NewClient(testServer.URL, "fake-username", "mock-password-cool", nil)
@@ -220,4 +220,20 @@ func TestQuerySpecificComputer(t *testing.T) {
 	assert.Equal(t, 2, computer.Info.ConfigProfiles[0].ID)
 	assert.Equal(t, "Test Config Profile", computer.Info.ConfigProfiles[0].Name)
 	assert.Equal(t, false, computer.Info.ConfigProfiles[0].Removable)
+}
+
+func TestGetComputer(t *testing.T) {
+	testServer := computerResponseMocks(t)
+	defer testServer.Close()
+	j, err := jamf.NewClient(testServer.URL, "fake-username", "mock-password-cool", nil)
+	assert.Nil(t, err)
+
+	opts := &jamf.GetComputerOptions{
+		ID: "82",
+	}
+
+	computer, err := j.GetComputer(opts)
+	assert.Nil(t, err)
+	// General Info
+	assert.Equal(t, 82, computer.Info.General.ID)
 }

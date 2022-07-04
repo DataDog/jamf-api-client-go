@@ -95,11 +95,11 @@ func (j *Client) CreateScript(content *ScriptContents) (*ScriptContents, error) 
 	}
 
 	if content.Name == "" {
-		return nil, errors.Wrapf(fmt.Errorf("Name required for new script"), "unable to process JAMF creation request for script: (%s)", ep)
+		return nil, errors.Wrapf(fmt.Errorf("name required for new script"), "unable to process JAMF creation request for script: (%s)", ep)
 	}
 
 	if content.Contents == "" {
-		return nil, errors.Wrapf(fmt.Errorf("Script contents required"), "unable to process JAMF creation request for script: (%s)", ep)
+		return nil, errors.Wrapf(fmt.Errorf("script contents required"), "unable to process JAMF creation request for script: (%s)", ep)
 	}
 
 	if content.Filename == "" {
