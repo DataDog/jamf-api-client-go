@@ -81,7 +81,6 @@ func (j *Client) GetComputer(identifier *ComputerIdentifier) (*Computer, error) 
 	if err := j.makeAPIrequest(req, &res); err != nil {
 		return nil, errors.Wrapf(err, "unable to query enrolled computer for computer: %s", ep)
 	}
-
 	return res, nil
 }
 
@@ -98,9 +97,10 @@ func (j *Client) UpdateComputer(identifier *ComputerIdentifier, updates *Compute
 	if err != nil {
 		return nil, errors.Wrapf(err, "error building JAMF update request for computer: %v (%s)", identifier, ep)
 	}
-	res := &ComputerDetails{}
+
+	res := ComputerDetails{}
 	if err := j.makeAPIrequest(req, &res); err != nil {
 		return nil, errors.Wrapf(err, "unable to process JAMF update request for computer: %v (%s)", identifier, ep)
 	}
-	return res, nil
+	return &res, nil
 }
