@@ -179,9 +179,7 @@ func computerResponseMocks(t *testing.T) *httptest.Server {
 				if err != nil {
 					fmt.Fprint(w, err.Error())
 				}
-				contents := &jamf.ComputerDetails{
-					ID: 000,
-				}
+				contents := &jamf.ComputerDetails{}
 				err = xml.Unmarshal(data, contents)
 				if err != nil {
 					fmt.Fprint(w, err.Error())
