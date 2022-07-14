@@ -29,6 +29,7 @@ type Computer struct {
 
 type ComputerDetails struct {
 	XMLName             xml.Name                 `json:"-" xml:"computer,omitempty"`
+	ID                  int                      `json:"id,omitempty" xml:"id,omitempty"`
 	General             GeneralInformation       `json:"general" xml:"general,omitempty"`
 	UserLocation        LocationInformation      `json:"location" xml:"location,omitempty"`
 	Hardware            HardwareInformation      `json:"hardware" xml:"-"`
