@@ -1,4 +1,11 @@
 #### Classic
+  - `/classes`
+    - [x] [Get all classes](https://developer.jamf.com/jamf-pro/reference/findclasses)
+    - [x] Get specific classes by [ID](https://developer.jamf.com/jamf-pro/reference/findclassesbyid) or [Name](https://developer.jamf.com/jamf-pro/reference/findclassesbyname)
+    - [x] [Create a new class by ID](https://developer.jamf.com/jamf-pro/reference/createclassbyid) 
+    - [x] Update class by [ID](https://developer.jamf.com/jamf-pro/reference/updateclassbyid) or [Name](https://developer.jamf.com/jamf-pro/reference/updateclassbyname)
+    - [x] Delete class by [ID](https://developer.jamf.com/jamf-pro/reference/deleteclassbyid) or [Name](https://developer.jamf.com/jamf-pro/reference/deleteclassbyname)
+
   - `/computers`
     - [x] [Get all computers](https://www.jamf.com/developers/apis/classic/reference/#/computers/findComputers)
     - [x] Get specific computer by [ID](https://www.jamf.com/developers/apis/classic/reference/#/computers/findComputersById) or [Name](https://www.jamf.com/developers/apis/classic/reference/#/computers/findComputersByName)
