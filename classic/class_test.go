@@ -6,7 +6,7 @@ import (
 	"encoding/json"
 	"encoding/xml"
 	"fmt"
-	"io/ioutil"
+	"io"
 	"net/http"
 	"net/http/httptest"
 	"testing"
@@ -15,7 +15,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-var CLASS_API_BASE_ENDPOINT = "/JSSResource/computerextensionattributes"
+var CLASS_API_BASE_ENDPOINT = "/JSSResource/classes"
 
 func classResponseMocks(t *testing.T) *httptest.Server {
 	var resp string
@@ -37,23 +37,23 @@ func classResponseMocks(t *testing.T) *httptest.Server {
 							"name": "5th - English"
 					}]
 			}`)
-		case fmt.Sprintf("%s/id/6243", CLASS_API_BASE_ENDPOINT), fmt.Sprintf("%s/id/-1", CLASS_API_BASE_ENDPOINT), fmt.Sprintf("%s/name/5th%s-%sEnglish", CLASS_API_BASE_ENDPOINT, "%20", "%20"):
+		case fmt.Sprintf("%s/id/6243", CLASS_API_BASE_ENDPOINT), fmt.Sprintf("%s/id/-1", CLASS_API_BASE_ENDPOINT), fmt.Sprintf("%s/name/1st%s-%sMath", CLASS_API_BASE_ENDPOINT, "%20", "%20"):
 			switch r.Method {
 			case "PUT", "POST":
-				data, err := ioutil.ReadAll(r.Body)
+				data, err := io.ReadAll(r.Body)
 				if err != nil {
-					fmt.Fprintf(w, err.Error())
+					fmt.Fprint(w, err.Error())
 				}
 				classContents := &jamf.Class{}
 				err = xml.Unmarshal(data, classContents)
 				if err != nil {
-					fmt.Fprintf(w, err.Error())
+					fmt.Fprint(w, err.Error())
 				}
 				classData, err := json.MarshalIndent(classContents, "", "    ")
 				if err != nil {
-					fmt.Fprintf(w, err.Error())
+					fmt.Fprint(w, err.Error())
 				}
-				fmt.Fprintf(w, string(classData))
+				fmt.Fprint(w, string(classData))
 			default:
 				mockClass := &jamf.ClassDetails{
 					Details: &jamf.Class{
@@ -85,16 +85,16 @@ func classResponseMocks(t *testing.T) *httptest.Server {
 				if r.Method == "DELETE" {
 					classData, err = json.MarshalIndent(mockClass.Details, "", "    ")
 					if err != nil {
-						fmt.Fprintf(w, err.Error())
+						fmt.Fprint(w, err.Error())
 					}
 				} else {
 					classData, err = json.MarshalIndent(mockClass, "", "    ")
 					if err != nil {
-						fmt.Fprintf(w, err.Error())
+						fmt.Fprint(w, err.Error())
 					}
 				}
 
-				fmt.Fprintf(w, string(classData))
+				fmt.Fprint(w, string(classData))
 			}
 		default:
 			http.Error(w, fmt.Sprintf("bad Jamf API %s call to %s", r.Method, r.URL), http.StatusInternalServerError)
@@ -123,11 +123,11 @@ func TestQuerySpecificClassByName(t *testing.T) {
 	defer testServer.Close()
 	j, err := jamf.NewClient(testServer.URL, "fake-username", "mock-password-cool", nil)
 	assert.Nil(t, err)
-	class, err := j.ClassDetails("5th - English")
+	class, err := j.ClassDetails("1st - Math")
 	assert.Nil(t, err)
-	assert.NotNil(t, class)
-	assert.Equal(t, 6244, class.Details.ID)
-	assert.Equal(t, "5th - English", class.Details.Name)
+	assert.Equal(t, 6243, class.Details.ID)
+	assert.Equal(t, "1st - Math", class.Details.Name)
+	assert.Equal(t, "First period math class.", class.Details.Description)
 }
 
 func TestQuerySpecificClassByID(t *testing.T) {
@@ -140,56 +140,64 @@ func TestQuerySpecificClassByID(t *testing.T) {
 	assert.NotNil(t, class)
 	assert.Equal(t, 6243, class.Details.ID)
 	assert.Equal(t, "1st - Math", class.Details.Name)
+	assert.Equal(t, "First period math class.", class.Details.Description)
 }
 
-// func TestUpdateClass(t *testing.T) {
-// 	testServer := computerExtAttrResponseMocks(t)
-// 	defer testServer.Close()
-// 	j, err := jamf.NewClient(testServer.URL, "fake-username", "mock-password-cool", nil)
-// 	assert.Nil(t, err)
+func TestUpdateClass(t *testing.T) {
+	testServer := classResponseMocks(t)
+	defer testServer.Close()
+	j, err := jamf.NewClient(testServer.URL, "fake-username", "mock-password-cool", nil)
+	assert.Nil(t, err)
 
-// 	update := &jamf.ComputerExtensionAttribute{
-// 		Description: "Updated description",
-// 		Enabled:     false,
-// 	}
+	update := &jamf.Class{
+		Description: "Updated description",
+		Teachers: []string{
+			"janedoe@example.com",
+		},
+	}
 
-// 	updatedComputerExtAttr, err := j.UpdateComputerExtensionAttribue(33, update)
-// 	assert.Nil(t, err)
-// 	assert.Equal(t, "Updated description", updatedComputerExtAttr.Description)
-// 	assert.False(t, updatedComputerExtAttr.Enabled)
-// }
+	updatedClass, err := j.UpdateClass(6243, update)
+	assert.Nil(t, err)
+	assert.Equal(t, "Updated description", updatedClass.Description)
+	assert.Equal(t, []string{"janedoe@example.com"}, updatedClass.Teachers)
+}
 
-// func TestCreateClass(t *testing.T) {
-// 	testServer := computerExtAttrResponseMocks(t)
-// 	defer testServer.Close()
-// 	j, err := jamf.NewClient(testServer.URL, "fake-username", "mock-password-cool", nil)
-// 	assert.Nil(t, err)
+func TestCreateClass(t *testing.T) {
+	testServer := classResponseMocks(t)
+	defer testServer.Close()
+	j, err := jamf.NewClient(testServer.URL, "fake-username", "mock-password-cool", nil)
+	assert.Nil(t, err)
 
-// 	newCompExtAttr := &jamf.ComputerExtensionAttribute{}
-// 	_, err = j.CreateComputerExtensionAttribute(newCompExtAttr)
-// 	assert.NotNil(t, err)
-// 	assert.Contains(t, err.Error(), "Name required for new computer extension attribute")
+	newClass := &jamf.Class{}
+	_, err = j.CreateClass(newClass)
+	assert.NotNil(t, err)
+	assert.Contains(t, err.Error(), "name required for new class")
 
-// 	newCompExtAttr = &jamf.ComputerExtensionAttribute{
-// 		Name:        "Testing Ext Attr",
-// 		Description: "This is a test description",
-// 		Enabled:     true,
-// 		DataType:    "String",
-// 		InputType: &jamf.ComputerExtensionAttrInputType{
-// 			Type:     "script",
-// 			Platform: "Mac",
-// 			Script:   "echo \"Hello World, I am a unit test\"",
-// 		},
-// 	}
-// 	cea, err := j.CreateComputerExtensionAttribute(newCompExtAttr)
-// 	assert.Nil(t, err)
-// 	assert.Equal(t, "Testing Ext Attr", cea.Name)
-// 	assert.Equal(t, "This is a test description", cea.Description)
-// 	assert.True(t, cea.Enabled)
-// 	assert.Equal(t, "Mac", cea.InputType.Platform)
-// 	assert.Equal(t, "script", cea.InputType.Type)
-// 	assert.Equal(t, "echo \"Hello World, I am a unit test\"", cea.InputType.Script)
-// }
+	newClass = &jamf.Class{
+		Name:        "2nd - History",
+		Description: "Second period history class.",
+		Students: []string{
+			"jappleseed@example.com",
+			"sappleseed@example.com",
+		},
+		Teachers: []string{
+			"jdoe@example.com",
+		},
+		MeetingTimes: []jamf.MeetingTime{
+			jamf.MeetingTime{
+				Days:      "M W F",
+				StartTime: "845",
+				EndTime:   "945",
+			},
+		},
+	}
+	class, err := j.CreateClass(newClass)
+	assert.Nil(t, err)
+	assert.Equal(t, "2nd - History", class.Name)
+	assert.Equal(t, "Second period history class.", class.Description)
+	assert.Equal(t, []string{"jappleseed@example.com", "sappleseed@example.com"}, class.Students)
+	assert.Equal(t, []string{"jdoe@example.com"}, class.Teachers)
+}
 
 func TestDeleteClass(t *testing.T) {
 	testServer := classResponseMocks(t)

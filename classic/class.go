@@ -80,6 +80,32 @@ func (j *Client) CreateClass(content *Class) (*Class, error) {
 	return &res, nil
 }
 
+// UpdateClass will update a mobile device class in Jamf by either ID or Name
+func (j *Client) UpdateClass(identifier interface{}, content *Class) (*Class, error) {
+	ep, err := EndpointBuilder(j.Endpoint, classesContext, identifier)
+	if err != nil {
+		return nil, errors.Wrapf(err, "error building JAMF query request for class: %v", identifier)
+	}
+
+	bodyContent, err := xml.Marshal(content)
+	if err != nil {
+		return nil, errors.Wrapf(err, "error building JAMF update payload for class: %v", identifier)
+	}
+
+	body := bytes.NewReader(bodyContent)
+	req, err := http.NewRequestWithContext(context.Background(), "PUT", ep, body)
+	if err != nil {
+		return nil, errors.Wrapf(err, "error building JAMF update request for class: %v (%s)", identifier, ep)
+	}
+
+	res := Class{}
+	if err := j.makeAPIrequest(req, &res); err != nil {
+		return nil, errors.Wrapf(err, "unable to process JAMF update request for class: %v (%s)", identifier, ep)
+	}
+
+	return &res, nil
+}
+
 // DeleteClass will delete a mobile device class by either ID or Name
 func (j *Client) DeleteClass(identifier interface{}) (*Class, error) {
 	ep, err := EndpointBuilder(j.Endpoint, classesContext, identifier)
