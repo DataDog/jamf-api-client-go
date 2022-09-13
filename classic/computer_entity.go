@@ -24,52 +24,55 @@ type BasicComputerInfo struct {
 
 // Computer represents an individual computer enrolled in Jamf with all its associated information
 type Computer struct {
-	Info struct {
-		General             GeneralInformation       `json:"general"`
-		UserLocation        LocationInformation      `json:"location"`
-		Hardware            HardwareInformation      `json:"hardware"`
-		Certificates        []CertificateInformation `json:"certificates"`
-		Software            SoftwareInformation      `json:"software"`
-		ExtensionAttributes []ExtensionAttributes    `json:"extension_attributes"`
-		Groups              GroupInformation         `json:"groups_accounts"`
-		ConfigProfiles      []ConfigProfile          `json:"configuration_profiles"`
-	} `json:"computer"`
+	Info ComputerDetails `json:"computer" xml:"computer,omitempty"`
+}
+
+type ComputerDetails struct {
+	XMLName             xml.Name                 `json:"-" xml:"computer,omitempty"`
+	ID                  int                      `json:"id,omitempty" xml:"id,omitempty"`
+	General             GeneralInformation       `json:"general" xml:"general,omitempty"`
+	UserLocation        LocationInformation      `json:"location" xml:"location,omitempty"`
+	Hardware            HardwareInformation      `json:"hardware" xml:"-"`
+	Certificates        []CertificateInformation `json:"certificates" xml:"-"`
+	Software            SoftwareInformation      `json:"software" xml:"-"`
+	ExtensionAttributes []ExtensionAttributes    `json:"extension_attributes" xml:"extension_attributes,omitempty"`
+	Groups              GroupInformation         `json:"groups_accounts" xml:"-"`
+	ConfigProfiles      []ConfigProfile          `json:"configuration_profiles" xml:"configuration_profiles,omitempty"`
 }
 
 // GeneralInformation holds basic information associated with Jamf device
 type GeneralInformation struct {
-	XMLName      xml.Name `json:"-" xml:"computer,omitempty"`
-	ID           int      `json:"id,omitempty" xml:"id,omitempty"`
-	Name         string   `json:"name" xml:"name,omitempty"`
-	MACAddress   string   `json:"mac_address" xml:"mac_address,omitempty"`
-	SerialNumber string   `json:"serial_number" xml:"serial_number,omitempty"`
-	UDID         string   `json:"udid" xml:"udid,omitempty"`
-	JamfVersion  string   `json:"jamf_version" xml:"jamf_version,omitempty"`
-	Platform     string   `json:"platform" xml:"platform,omitempty"`
-	MDMCapable   bool     `json:"mdm_capable" xml:"mdm_capable,omitempty"`
-	ReportDate   string   `json:"report_date" xml:"report_date,omitempty"`
+	ID           int    `json:"id,omitempty" xml:"id,omitempty"`
+	Name         string `json:"name" xml:"name,omitempty"`
+	MACAddress   string `json:"mac_address" xml:"mac_address,omitempty"`
+	SerialNumber string `json:"serial_number" xml:"serial_number,omitempty"`
+	UDID         string `json:"udid" xml:"udid,omitempty"`
+	JamfVersion  string `json:"jamf_version" xml:"jamf_version,omitempty"`
+	Platform     string `json:"platform" xml:"platform,omitempty"`
+	MDMCapable   bool   `json:"mdm_capable" xml:"mdm_capable,omitempty"`
+	ReportDate   string `json:"report_date" xml:"report_date,omitempty"`
 }
 
 // LocationInformation holds the information in the User & Locations section
 type LocationInformation struct {
-	Username     string `json:"username"`
-	RealName     string `json:"realname"`
-	EmailAddress string `json:"email_address"`
-	Position     string `json:"position"`
-	Department   string `json:"department"`
-	Building     string `json:"building"`
+	Username     string `json:"username" xml:"username,omitempty"`
+	RealName     string `json:"realname" xml:"realname,omitempty"`
+	EmailAddress string `json:"email_address" xml:"email_address,omitempty"`
+	Position     string `json:"position" xml:"position,omitempty"`
+	Department   string `json:"department" xml:"department,omitempty"`
+	Building     string `json:"building" xml:"building,omitempty"`
 }
 
 // HardwareInformation holds the hardware specific device information
 type HardwareInformation struct {
-	Make             string   `json:"make"`
-	OSName           string   `json:"os_name"`
-	OSVersion        string   `json:"os_version"`
-	OSBuild          string   `json:"os_build"`
-	SIPStatus        string   `json:"sip_status"`
-	GatekeeperStatus string   `json:"gatekeeper_status"`
-	XProtectVersion  string   `json:"xprotect_version"`
-	FilevaultUsers   []string `json:"filevault2_users"`
+	Make             string   `json:"make" xml:"make,omitempty"`
+	OSName           string   `json:"os_name" xml:"os_name,omitempty"`
+	OSVersion        string   `json:"os_version" xml:"os_version,omitempty"`
+	OSBuild          string   `json:"os_build" xml:"os_build,omitempty"`
+	SIPStatus        string   `json:"sip_status" xml:"sip_status,omitempty"`
+	GatekeeperStatus string   `json:"gatekeeper_status" xml:"gatekeeper_status,omitempty"`
+	XProtectVersion  string   `json:"xprotect_version" xml:"xprotect_version,omitempty"`
+	FilevaultUsers   []string `json:"filevault2_users" xml:"filevault2_users,omitempty"`
 }
 
 // CertificateInformation holds information about certs intalled on the device

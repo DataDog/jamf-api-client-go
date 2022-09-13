@@ -183,14 +183,14 @@ func TestCreateScriptRequiredContent(t *testing.T) {
 
 	_, err = j.CreateScript(newScript)
 	assert.NotNil(t, err)
-	assert.Contains(t, err.Error(), "Name required for new script")
+	assert.Contains(t, err.Error(), "name required for new script")
 
 	newScriptNoContent := &jamf.ScriptContents{
 		Name: "I am missing contents",
 	}
 	_, contentErr := j.CreateScript(newScriptNoContent)
 	assert.NotNil(t, contentErr)
-	assert.Contains(t, contentErr.Error(), "Script contents required")
+	assert.Contains(t, contentErr.Error(), "script contents required")
 }
 
 func TestDeleteScript(t *testing.T) {

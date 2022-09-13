@@ -20,7 +20,7 @@ import (
 func (j *Client) ComputerExtensionAttrExists(identifier interface{}) bool {
 	_, err := j.ComputerExtensionAttributeDetails(identifier)
 	if err != nil {
-		if !strings.Contains(err.Error(), "The server has not found anything matching the request URI") {
+		if !strings.Contains(err.Error(), "the server has not found anything matching the request URI") {
 			j.logger.Errorf("did not find computer extension attribute %v due to %s", identifier, err.Error())
 		}
 		return false
@@ -102,11 +102,11 @@ func (j *Client) CreateComputerExtensionAttribute(content *ComputerExtensionAttr
 	}
 
 	if content == nil {
-		return nil, errors.Wrapf(fmt.Errorf("Empty payload"), "unable to process JAMF creation request for computer extension attribute: (%s)", ep)
+		return nil, errors.Wrapf(fmt.Errorf("empty payload"), "unable to process JAMF creation request for computer extension attribute: (%s)", ep)
 	}
 
 	if content.Name == "" {
-		return nil, errors.Wrapf(fmt.Errorf("Name required for new computer extension attribute"), "unable to process JAMF creation request for computer extension attribute: (%s)", ep)
+		return nil, errors.Wrapf(fmt.Errorf("name required for new computer extension attribute"), "unable to process JAMF creation request for computer extension attribute: (%s)", ep)
 	}
 
 	err = ValidateComputerExtensionAttribute(content)

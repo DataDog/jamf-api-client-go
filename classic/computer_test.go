@@ -3,7 +3,10 @@
 package classic_test
 
 import (
+	"encoding/json"
+	"encoding/xml"
 	"fmt"
+	"io/ioutil"
 	"net/http"
 	"net/http/httptest"
 	"testing"
@@ -153,6 +156,41 @@ func computerResponseMocks(t *testing.T) *httptest.Server {
 						}]
 				}
 			}`)
+		case fmt.Sprintf("%s/serialnumber/VM0L+J/0cr+l", COMPUTER_API_BASE_ENDPOINT):
+			switch r.Method {
+			case "GET":
+				fmt.Fprintf(w, `{
+					"computer": {
+						"general": {
+							"id": 82,
+							"name": "Test Machine (Serial Number)",
+							"mac_address": "00:00:00:A0:FE:00",
+							"serial_number": "VM0L+J/0cr+l",
+							"udid": "000DF0BF-00FF-D00B-FA00-000F0DA0FE00",
+							"jamf_version": "20.18.0-t0000000000",
+							"platform": "Mac",
+							"mdm_capable": false,
+							"report_date": "2020-09-11 23:06:00"
+						}
+					}
+				}`)
+			case "PUT", "POST":
+				data, err := ioutil.ReadAll(r.Body)
+				if err != nil {
+					fmt.Fprint(w, err.Error())
+				}
+				contents := &jamf.ComputerDetails{}
+				err = xml.Unmarshal(data, contents)
+				if err != nil {
+					fmt.Fprint(w, err.Error())
+				}
+				resp, err := json.MarshalIndent(contents, "", "    ")
+				if err != nil {
+					fmt.Fprint(w, err.Error())
+				}
+				fmt.Fprint(w, string(resp))
+			}
+
 		default:
 			http.Error(w, fmt.Sprintf("bad Jamf computer API call to %s", r.URL), http.StatusInternalServerError)
 			return
@@ -161,7 +199,7 @@ func computerResponseMocks(t *testing.T) *httptest.Server {
 		assert.Nil(t, err)
 	}))
 }
-func TestQueryComputer(t *testing.T) {
+func TestListComputers(t *testing.T) {
 	testServer := computerResponseMocks(t)
 	defer testServer.Close()
 	j, err := jamf.NewClient(testServer.URL, "fake-username", "mock-password-cool", nil)
@@ -220,4 +258,62 @@ func TestQuerySpecificComputer(t *testing.T) {
 	assert.Equal(t, 2, computer.Info.ConfigProfiles[0].ID)
 	assert.Equal(t, "Test Config Profile", computer.Info.ConfigProfiles[0].Name)
 	assert.Equal(t, false, computer.Info.ConfigProfiles[0].Removable)
+}
+
+func TestGetComputer__ID(t *testing.T) {
+	testServer := computerResponseMocks(t)
+	defer testServer.Close()
+	j, err := jamf.NewClient(testServer.URL, "fake-username", "mock-password-cool", nil)
+	assert.Nil(t, err)
+
+	id := &jamf.ComputerIdentifier{
+		ID: "82",
+	}
+
+	computer, err := j.GetComputer(id)
+	assert.Nil(t, err)
+	// General Info
+	assert.Equal(t, 82, computer.Info.General.ID)
+}
+
+func TestGetComputer__SerialNumber(t *testing.T) {
+	testServer := computerResponseMocks(t)
+	defer testServer.Close()
+	j, err := jamf.NewClient(testServer.URL, "fake-username", "mock-password-cool", nil)
+	assert.Nil(t, err)
+
+	id := &jamf.ComputerIdentifier{
+		SerialNumber: "VM0L+J/0cr+l",
+	}
+
+	computer, err := j.GetComputer(id)
+	assert.Nil(t, err)
+	// General Info
+	assert.Equal(t, 82, computer.Info.General.ID)
+	assert.Equal(t, "Test Machine (Serial Number)", computer.Info.General.Name)
+}
+
+func TestUpdateComputer__SerialNumber(t *testing.T) {
+	testServer := computerResponseMocks(t)
+	defer testServer.Close()
+	j, err := jamf.NewClient(testServer.URL, "fake-username", "mock-password-cool", nil)
+	assert.Nil(t, err)
+
+	update := &jamf.ComputerDetails{
+		General: jamf.GeneralInformation{
+			Name: "Updated_Computer",
+		},
+		UserLocation: jamf.LocationInformation{
+			EmailAddress: "test@email.com",
+		},
+	}
+
+	id := &jamf.ComputerIdentifier{
+		SerialNumber: "VM0L+J/0cr+l",
+	}
+
+	comp, err := j.UpdateComputer(id, update)
+	assert.Nil(t, err)
+	assert.Equal(t, "Updated_Computer", comp.General.Name)
+	assert.Equal(t, "test@email.com", comp.UserLocation.EmailAddress)
 }
