@@ -6,34 +6,34 @@
     - [x] Update class by [ID](https://developer.jamf.com/jamf-pro/reference/updateclassbyid) or [Name](https://developer.jamf.com/jamf-pro/reference/updateclassbyname)
     - [x] Delete class by [ID](https://developer.jamf.com/jamf-pro/reference/deleteclassbyid) or [Name](https://developer.jamf.com/jamf-pro/reference/deleteclassbyname)
 
-  - `/computers`
-    - [x] [Get all computers](https://www.jamf.com/developers/apis/classic/reference/#/computers/findComputers)
-    - [x] Get specific computer by [ID](https://www.jamf.com/developers/apis/classic/reference/#/computers/findComputersById) or [Name](https://www.jamf.com/developers/apis/classic/reference/#/computers/findComputersByName)
-    - [x] Update computer by [ID](https://www.jamf.com/developers/apis/classic/reference/#/computers/updateComputerById) or [Name](https://www.jamf.com/developers/apis/classic/reference/#/computers/updateComputerByName)
-
   - `/computerextensionattributes`
-    - [x] [Get all computer extension attributes](https://www.jamf.com/developers/apis/classic/reference/#/computerextensionattributes/Computerextensionattributes)
-    - [x] Get specific computer extension attribute by [ID](https://www.jamf.com/developers/apis/classic/reference/#/computerextensionattributes/findComputerextensionattributeById) or [Name](https://www.jamf.com/developers/apis/classic/reference/#/computerextensionattributes/findComputerextensionattributeByName)
-    - [x] Create new computer extension attribute by [ID](https://www.jamf.com/developers/apis/classic/reference/#/policies/createComputerextensionattributeById) 
-    - [x] Update computer extension attribute by [ID](https://www.jamf.com/developers/apis/classic/reference/#/computerextensionattributes/updateComputerextensionattributeById) or [Name](https://www.jamf.com/developers/apis/classic/reference/#/computerextensionattributes/updateComputerextensionattributeByName)
-    - [x] Delete computer extensio nattribute by [ID](https://www.jamf.com/developers/apis/classic/reference/#/computerextensionattributes/deleteComputerextensionattributeById) or [Name](https://www.jamf.com/developers/apis/classic/reference/#/computerextensionattributes/deleteComputerextensionattributeByName)
+    - [x] [Get all computer extension attributes](https://developer.jamf.com/jamf-pro/reference/findcomputerextensionattributes)
+    - [x] Get specific computer extension attribute by [ID](https://developer.jamf.com/jamf-pro/reference/findcomputerextensionattributesbyid) or [Name](https://developer.jamf.com/jamf-pro/reference/findcomputerextensionattributesbyname)
+    - [x] [Create new computer extension attribute by ID](https://developer.jamf.com/jamf-pro/reference/createcomputerextensionattributebyid) 
+    - [x] Update computer extension attribute by [ID](https://developer.jamf.com/jamf-pro/reference/updatecomputerextensionattributebyid) or [Name](https://developer.jamf.com/jamf-pro/reference/updatecomputerextensionattributebyname)
+    - [x] Delete computer extension attribute by [ID](https://developer.jamf.com/jamf-pro/reference/deletecomputerextensionattributebyid) or [Name](https://developer.jamf.com/jamf-pro/reference/deletecomputerextensionattributebyname)
 
-  - `/scripts`
-    - [x] [Get all scripts](https://www.jamf.com/developers/apis/classic/reference/#/scripts/findScripts)
-    - [x] Get specific script by [ID](https://www.jamf.com/developers/apis/classic/reference/#/scripts/findScriptsById) or [Name](https://www.jamf.com/developers/apis/classic/reference/#/scripts/findScriptsByName) **Note:** only JSON response available for GET requests (XML Unmarshalling not currently configured)
-    - [x] Update script by [ID](https://www.jamf.com/developers/apis/classic/reference/#/scripts/updateScriptById) or [Name](https://www.jamf.com/developers/apis/classic/reference/#/scripts/updateScriptByName)
-    - [x] Create new script by [ID](https://www.jamf.com/developers/apis/classic/reference/#/scripts/createScriptById) or [Name](https://www.jamf.com/developers/apis/classic/reference/#/scripts/createScriptByName)
-    - [x] Delete script by [ID](https://www.jamf.com/developers/apis/classic/reference/#/scripts/deleteScriptById) or [Name](https://www.jamf.com/developers/apis/classic/reference/#/scripts/deleteScriptByName)
-
-  - `/policies`
-    - [x] [Get all policies](https://www.jamf.com/developers/apis/classic/reference/#/policies/findPolicies)
-    - [x] Get policy by [ID](https://www.jamf.com/developers/apis/classic/reference/#/policies/findPoliciesById) or [Name](https://www.jamf.com/developers/apis/classic/reference/#/policies/findPoliciesByName)
-    - [x] Update policy by [ID](https://www.jamf.com/developers/apis/classic/reference/#/policies/updatePolicyById) or [Name](https://www.jamf.com/developers/apis/classic/reference/#/policies/updatePolicyByName)
-    - [x] Create new policy by [ID](https://www.jamf.com/developers/apis/classic/reference/#/policies/createPolicyById) or [Name](https://www.jamf.com/developers/apis/classic/reference/#/policies/updatePolicyByName)
-    - [x] Delete policy by [ID](https://www.jamf.com/developers/apis/classic/reference/#/policies/deletePolicyById) or [Name](https://www.jamf.com/developers/apis/classic/reference/#/policies/deletePolicyByName)
+  - `/computers`
+    - [x] [Get all computers](https://developer.jamf.com/jamf-pro/reference/findcomputers)
+    - [x] Get specific computer by [ID](https://developer.jamf.com/jamf-pro/reference/findcomputersbyid) or [first computer by Name](https://developer.jamf.com/jamf-pro/reference/findcomputersbyname)
+    - [x] Update computer by [ID](https://developer.jamf.com/jamf-pro/reference/updatecomputerbyid) or [Name](https://developer.jamf.com/jamf-pro/reference/updatecomputerbyname)
 
   - `/osxconfigurationprofiles` **(In Progress)**
-    - [ ] [Get all configuration profiles](https://www.jamf.com/developers/apis/classic/reference/#/osxconfigurationprofiles/findOsxConfigurationProfiles)
-    - [ ] [Get configuration profile by ID or Name](https://www.jamf.com/developers/apis/classic/reference/#/osxconfigurationprofiles/findOsxConfigurationProfilesById)
-    - [ ] [Update configuration profile by ID or Name](https://www.jamf.com/developers/apis/classic/reference/#/osxconfigurationprofiles/updateOsxConfigurationProfileById)
-    - [ ] [Create configuration profile by ID or Name](https://www.jamf.com/developers/apis/classic/reference/#/osxconfigurationprofiles/createOsxConfigurationProfileById)
+    - [ ] [Get all configuration profiles](https://developer.jamf.com/jamf-pro/reference/findosxconfigurationprofiles)
+    - [ ] Get configuration profile by [ID](https://developer.jamf.com/jamf-pro/reference/findosxconfigurationprofilesbyid) or [Name](https://developer.jamf.com/jamf-pro/reference/findosxconfigurationprofilesbyname)
+    - [ ] Update configuration profile by [ID](https://developer.jamf.com/jamf-pro/reference/updateosxconfigurationprofilebyid) or [Name](https://developer.jamf.com/jamf-pro/reference/updateosxconfigurationprofilebyname)
+    - [ ] [Create configuration profile by ID](https://developer.jamf.com/jamf-pro/reference/createosxconfigurationprofilebyid)
+  
+  - `/policies`
+    - [x] [Get all policies](https://developer.jamf.com/jamf-pro/reference/findpolicies)
+    - [x] Get policy by [ID](https://developer.jamf.com/jamf-pro/reference/findpoliciesbyid) or [Name](https://developer.jamf.com/jamf-pro/reference/findpoliciesbyname)
+    - [x] Update policy by [ID](https://developer.jamf.com/jamf-pro/reference/updatepolicybyid) or [Name](https://www.jamf.com/developers/apis/classic/reference/#/policies/updatePolicyByName)
+    - [x] [Create new policy by ID](https://developer.jamf.com/jamf-pro/reference/createpolicybyid)
+    - [x] Delete policy by [ID](https://developer.jamf.com/jamf-pro/reference/deletepolicybyid) or [Name](https://developer.jamf.com/jamf-pro/reference/deletepolicybyname)
+
+  - `/scripts`
+    - [x] [Get all scripts](https://developer.jamf.com/jamf-pro/reference/findscripts)
+    - [x] Get specific script by [ID](https://developer.jamf.com/jamf-pro/reference/findscriptsbyid) or [Name](https://developer.jamf.com/jamf-pro/reference/findscriptsbyname) **Note:** only JSON response available for GET requests (XML Unmarshalling not currently configured)
+    - [x] Update script by [ID](https://developer.jamf.com/jamf-pro/reference/updatescriptbyid) or [Name](https://developer.jamf.com/jamf-pro/reference/updatescriptbyname)
+    - [x] [Create new script by ID](https://developer.jamf.com/jamf-pro/reference/createscriptbyid)
+    - [x] Delete script by [ID](https://developer.jamf.com/jamf-pro/reference/deletescriptbyid) or [Name](https://developer.jamf.com/jamf-pro/reference/deletescriptbyname)
