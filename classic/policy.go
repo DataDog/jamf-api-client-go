@@ -91,7 +91,7 @@ func (j *Client) CreatePolicy(content *PolicyContents) (*PolicyContents, error) 
 	}
 
 	if content.General.Name == "" {
-		return nil, errors.Wrapf(fmt.Errorf("Name required for new policy"), "unable to process JAMF creation request for policy: (%s)", ep)
+		return nil, errors.Wrapf(fmt.Errorf("name required for new policy"), "unable to process JAMF creation request for policy: (%s)", ep)
 	}
 
 	if len(content.Scripts) > 0 {

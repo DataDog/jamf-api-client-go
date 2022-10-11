@@ -174,7 +174,7 @@ func TestCreateComputerExtAttr(t *testing.T) {
 	newCompExtAttr := &jamf.ComputerExtensionAttribute{}
 	_, err = j.CreateComputerExtensionAttribute(newCompExtAttr)
 	assert.NotNil(t, err)
-	assert.Contains(t, err.Error(), "Name required for new computer extension attribute")
+	assert.Contains(t, err.Error(), "name required for new computer extension attribute")
 
 	newCompExtAttr = &jamf.ComputerExtensionAttribute{
 		Name:        "Testing Ext Attr",

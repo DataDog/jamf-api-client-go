@@ -1,3 +1,8 @@
+## 1.0.0.beta.4
+- Adds support for `/classes` endpoint
+- Fixes bug in computer update response
+- Adds more intuitive search parameters for `GetComputers` (i.e id, name, serialnumber)
+- Adds in `UpdateComputer` method
 ## 1.0.0.beta.3
 - Refactors list methods to return list of objects by default i.e `j.Computers() => []BasicComputerInfo`.
 - Refactors list related structs to use `List` key

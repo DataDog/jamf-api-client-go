@@ -7,7 +7,7 @@ import (
 	"encoding/json"
 	"encoding/xml"
 	"fmt"
-	"io/ioutil"
+	"io"
 	"net/http"
 	"strings"
 	"time"
@@ -17,10 +17,11 @@ import (
 )
 
 const (
-	scriptsContext         = "scripts"
+	classesContext         = "classes"
 	computersContext       = "computers"
 	computerExtAttrContext = "computerextensionattributes"
 	policiesContext        = "policies"
+	scriptsContext         = "scripts"
 )
 
 // Client represents the interface used to communicate with
@@ -77,7 +78,7 @@ func (j *Client) makeAPIrequest(r *http.Request, v interface{}) error {
 
 	// If status code is not ok attempt to read the response in plain text
 	if res.StatusCode != 200 && res.StatusCode != 201 {
-		responseData, err := ioutil.ReadAll(res.Body)
+		responseData, err := io.ReadAll(res.Body)
 		if err != nil {
 			return errors.Wrapf(err, "request error: %s. unable to retrieve plain text response: %s", res.Status, err.Error())
 		}
