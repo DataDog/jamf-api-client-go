@@ -102,10 +102,10 @@ type ApplicationInformation struct {
 
 // ExtensionAttributes holds extension attribute information for a device
 type ExtensionAttributes struct {
-	ID    int    `json:"id,omitempty"`
-	Name  string `json:"name"`
-	Type  string `json:"type"`
-	Value string `json:"value"`
+	ID    int    `json:"id,omitempty" xml:"id,omitempty"`
+	Name  string `json:"name" xml:"name,omitempty"`
+	Type  string `json:"type" xml:"type,omitempty"`
+	Value string `json:"value" xml:"value,omitempty"`
 }
 
 // GroupInformation holds the groups the device is a member of
