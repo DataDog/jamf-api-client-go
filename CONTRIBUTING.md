@@ -3,6 +3,9 @@
 First of all, thanks for contributing!
 
 This document provides some basic guidelines for contributing to this repository. To propose improvements, feel free to submit a pull request.
+
+> Note: We're a small team and do our best to review PR's in a timely manner 💜
+
 ## Getting Started
 
 When building out more API client functionality it's helpful to use the [Postman Collection](https://github.com/jamf/Classic-API-Postman-Collection) provided by Jamf for testing endpoint responses and payloads.
@@ -15,6 +18,7 @@ some core tenets to keep in mind.
 
 2. Splitting your changes in easy to consume pieces that are self contained is important, but
    not important enough to impose a constant burden on the code author.
+
 ### Submitting Issues
 
 Github issues are welcome, feel free to submit error reports and feature requests! Make sure to add enough details to explain your use case.
@@ -24,11 +28,12 @@ Github issues are welcome, feel free to submit error reports and feature request
 - Fork a repository
 - Add new functionality or apply a fix
 - Check that tests are passing
-- Create PR against the latest `release-*` branch (or create one if applicable) and await review/approval.
+- Create a PR against the `main` branch and await review/approval.
+- Once merged, we will handle the new release 🎉
 
 **Please review the outlined process below to ensure your PR is good to go.**
 
-## Pull Request Process
+## Pull Request Guide
 
 1. Ensure PR template is filled out and all relevant action items in the checklist are covered. PR titles should include one of the following: 
      - `[FEATURE]`   - To be used with new features such as adding a new endpoint
