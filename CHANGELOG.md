@@ -1,3 +1,8 @@
+## 1.0.0.beta.5
+- Adds support for XML nesting extension attributes in `ComputerDetails`
+- Renames `ExtensionAttributes` type to `ExtensionAttribute`
+- Adds XML field tags for `ExtensionAttribute`
+
 ## 1.0.0.beta.4
 - Adds support for `/classes` endpoint
 - Fixes bug in computer update response
