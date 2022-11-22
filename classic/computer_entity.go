@@ -35,7 +35,7 @@ type ComputerDetails struct {
 	Hardware            HardwareInformation      `json:"hardware" xml:"-"`
 	Certificates        []CertificateInformation `json:"certificates" xml:"-"`
 	Software            SoftwareInformation      `json:"software" xml:"-"`
-	ExtensionAttributes []ExtensionAttribute     `json:"extension_attributes" xml:"extension_attributes>extension_attribute"`
+	ExtensionAttributes []ExtensionAttribute     `json:"extension_attributes" xml:"extension_attributes>extension_attribute,omitempty"`
 	Groups              GroupInformation         `json:"groups_accounts" xml:"-"`
 	ConfigProfiles      []ConfigProfile          `json:"configuration_profiles" xml:"configuration_profiles,omitempty"`
 }
@@ -103,9 +103,9 @@ type ApplicationInformation struct {
 // ExtensionAttribute holds extension attribute information for a device
 type ExtensionAttribute struct {
 	ID    int    `json:"id,omitempty" xml:"id,omitempty"`
-	Name  string `json:"name" xml:"name,omitempty"`
-	Type  string `json:"type" xml:"type,omitempty"`
-	Value string `json:"value" xml:"value,omitempty"`
+	Name  string `json:"name" xml:"name"`
+	Type  string `json:"type" xml:"type"`
+	Value string `json:"value" xml:"value"`
 }
 
 // GroupInformation holds the groups the device is a member of
