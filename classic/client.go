@@ -4,6 +4,7 @@
 package classic
 
 import (
+	"context"
 	"encoding/json"
 	"encoding/xml"
 	"fmt"
@@ -22,17 +23,21 @@ const (
 	computerExtAttrContext = "computerextensionattributes"
 	policiesContext        = "policies"
 	scriptsContext         = "scripts"
+	maxAuthAttempts        = 3
 )
 
 // Client represents the interface used to communicate with
 // the Jamf API via an HTTP client
 type Client struct {
-	Domain   string
-	Username string
-	Password string
-	Endpoint string
-	logger   *logrus.Logger
-	api      *http.Client
+	Domain       string
+	Username     string
+	Password     string
+	Endpoint     string
+	authAttempts int
+	useAuthToken bool
+	authToken    *AuthToken
+	logger       *logrus.Logger
+	api          *http.Client
 }
 
 // Used if custom client not passed on when NewClient instantiated
@@ -43,9 +48,14 @@ func defaultHTTPClient() *http.Client {
 }
 
 // NewClient returns a new Jamf HTTP client to be used for API requests
-func NewClient(domain string, username string, password string, client *http.Client) (*Client, error) {
+func NewClient(domain string, username string, password string, client *http.Client, opts ...Option) (*Client, error) {
 	if domain == "" || username == "" || password == "" {
 		return nil, errors.New("you must provide a valid Jamf domain, username, and password")
+	}
+
+	o, err := resolveOptions(opts)
+	if err != nil {
+		return nil, err
 	}
 
 	if client == nil {
@@ -53,12 +63,52 @@ func NewClient(domain string, username string, password string, client *http.Cli
 	}
 
 	return &Client{
-		Domain:   domain,
-		Username: username,
-		Password: password,
-		Endpoint: fmt.Sprintf("%s/JSSResource", domain),
-		api:      client,
+		Domain:       domain,
+		Username:     username,
+		Password:     password,
+		Endpoint:     fmt.Sprintf("%s/JSSResource", domain),
+		authToken:    &AuthToken{},
+		useAuthToken: o.useTokenAuth,
+		authAttempts: 0,
+		api:          client,
 	}, nil
+}
+
+// GetAuthToken will retrieve a bearer token using basic auth credentials which is now
+// required for newer server versions https://developer.jamf.com/jamf-pro/docs/getting-started-2#bearer-tokens
+// https://developer.jamf.com/jamf-pro/docs/classic-api-authentication-changes
+func (j *Client) GetAuthToken() error {
+	ep := fmt.Sprintf("%s/api/v1/auth/token", j.Domain)
+	req, err := http.NewRequestWithContext(context.Background(), "POST", ep, nil)
+	if err != nil {
+		return err
+	}
+	req.SetBasicAuth(j.Username, j.Password)
+
+	j.authAttempts += 1
+
+	res, err := j.api.Do(req)
+	if err != nil {
+		return errors.Wrapf(err, "error making %s request to %s", req.Method, req.URL)
+	}
+	defer res.Body.Close()
+
+	if res.StatusCode != 200 {
+		return errors.Wrapf(err, "error making %s request to %s: %d", req.Method, req.URL, res.StatusCode)
+	}
+
+	var token AuthToken
+	if err = json.NewDecoder(res.Body).Decode(&token); err != nil {
+		return errors.Wrap(err, "response was successful but error occurred error decoding response body")
+	}
+
+	j.authToken = &token
+
+	return nil
+}
+
+func (j *Client) AuthToken() *AuthToken {
+	return j.authToken
 }
 
 func (j *Client) makeAPIrequest(r *http.Request, v interface{}) error {
@@ -68,7 +118,25 @@ func (j *Client) makeAPIrequest(r *http.Request, v interface{}) error {
 	r.Header.Set("Accept", "application/json, application/xml;q=0.9")
 	r.Header.Set("Cache-Control", "no-store, no-cache, must-revalidate, max-age=0, post-check=0, pre-check=0")
 	r.Header.Set("Strict-Transport-Security", "max-age=31536000 ; includeSubDomains")
-	r.SetBasicAuth(j.Username, j.Password)
+
+	if j.useAuthToken {
+		expired, err := j.authToken.IsExpired()
+		if err != nil {
+			return err
+		}
+
+		if expired {
+			if j.authAttempts < maxAuthAttempts {
+				if err := j.GetAuthToken(); err != nil {
+					return errors.Wrapf(err, "error making %s request to %s: unauthorized", r.Method, r.URL)
+				}
+			}
+		}
+
+		r.Header.Set("Authorization", fmt.Sprintf("Bearer %s", j.authToken.Token))
+	} else {
+		r.SetBasicAuth(j.Username, j.Password)
+	}
 
 	res, err := j.api.Do(r)
 	if err != nil {
@@ -92,14 +160,14 @@ func (j *Client) makeAPIrequest(r *http.Request, v interface{}) error {
 	case "text/xml", "application/xml":
 		if err = xml.NewDecoder(res.Body).Decode(&v); err != nil {
 			// TODO: return a string or something
-			return errors.Wrapf(err, "response was successful but error occured decoding response body of type %s", t)
+			return errors.Wrapf(err, "response was successful but error occurred decoding response body of type %s", t)
 		}
 	case "text/json", "application/json", "text/plain":
 		if err = json.NewDecoder(res.Body).Decode(&v); err != nil {
-			return errors.Wrapf(err, "response was successful but error occured error decoding response body of type %s", t)
+			return errors.Wrapf(err, "response was successful but error occurred error decoding response body of type %s", t)
 		}
 	default:
-		return errors.Wrapf(err, "response was successful but error occured recieved unexpected response body of type %s", t)
+		return errors.Wrapf(err, "response was successful but error occurred received unexpected response body of type %s", t)
 	}
 
 	return nil

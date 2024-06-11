@@ -20,6 +20,21 @@ To see what functionality is available in the current API client release, please
 [Contribution](https://github.com/DataDog/jamf-api-client-go/blob/main/CONTRIBUTING.md) is welcome and appreciated! 🚀 💜
 ## Usage
 
+### Classic API Authentication
+
+If you server version requires [Bearer Token Authentication](https://developer.jamf.com/jamf-pro/docs/classic-api-authentication-changes) you can pass the `WithTokenAuth()` option to your client constructor
+
+```go
+import  jamf "github.com/DataDog/jamf-api-client-go/classic"
+
+// Create a client instance to interact with API and enable bearer token authentication
+j, err := jamf.NewClient("https://jamf.example.com", "YOUR_API_USER", "YOUR_USERS_PASSWORD_HERE", nil, jamf.WithTokenAuth())
+if err != nil {
+  os.Exit(1)
+}
+```
+
+### Full Example
 ```go
 import  jamf "github.com/DataDog/jamf-api-client-go/classic"
 

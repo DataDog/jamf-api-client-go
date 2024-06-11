@@ -1,3 +1,9 @@
+## 1.0.0.beta.6
+- Adds backwards compatible support for [classic API auth changes](https://developer.jamf.com/jamf-pro/docs/classic-api-authentication-changes) using `WithTokenAuth` client option
+- Adds basic `AuthToken` struct for storing token and checking if it is expired
+- Bump Go version from `1.18` to `1.22.2`
+- Patch `gopkg.in/yaml.v3 Denial of Service` vulnerability ([dependabot alert](https://github.com/DataDog/jamf-api-client-go/security/dependabot/2))
+
 ## 1.0.0.beta.5
 - Adds support for XML nesting extension attributes in `ComputerDetails`
 - Renames `ExtensionAttributes` type to `ExtensionAttribute`

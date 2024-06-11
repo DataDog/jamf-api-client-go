@@ -8,6 +8,7 @@ import (
 	"net/http"
 	"net/http/httptest"
 	"testing"
+	"time"
 
 	jamf "github.com/DataDog/jamf-api-client-go/classic"
 	"github.com/stretchr/testify/assert"
@@ -25,6 +26,15 @@ func clientResponseMock(t *testing.T) *httptest.Server {
 			resp = `{
 				"status": "OK"
 			}`
+		case "/api/v1/auth/token":
+			exp := time.Now().Add(time.Minute * 10).Format(time.RFC3339)
+			resp = fmt.Sprintf(
+				`{
+					"token": "eyJhbGciOiJIUzI1NiJ9.iam4fAKet3StTok3n",
+					"expires": "%s"
+				}`, exp,
+			)
+
 		default:
 			http.Error(w, fmt.Sprintf("bad API call to %s", r.URL), http.StatusInternalServerError)
 			return
@@ -58,6 +68,41 @@ func TestNewClient(t *testing.T) {
 	assert.True(t, ok)
 	assert.Equal(t, j.Username, sentUsername)
 	assert.Equal(t, j.Password, sentPwd)
+	assert.Equal(t, statusResponse.Status, "OK")
+}
+
+func TestNewClientWithTokenAuthOpt(t *testing.T) {
+	testServer := clientResponseMock(t)
+	defer testServer.Close()
+
+	j, err := jamf.NewClient(testServer.URL, "fake-username", "mock-password-cool", nil, jamf.WithTokenAuth())
+	assert.Nil(t, err)
+	assert.Equal(t, "fake-username", j.Username)
+	assert.Equal(t, "mock-password-cool", j.Password)
+	assert.Equal(t, fmt.Sprintf("%s/JSSResource", testServer.URL), j.Endpoint)
+
+	testResponseURL := fmt.Sprintf("%s/mock/test", j.Endpoint)
+	req, err := http.NewRequestWithContext(context.Background(), "GET", testResponseURL, nil)
+	assert.Nil(t, err)
+	assert.Equal(t, testResponseURL, fmt.Sprintf("%s://%s%s", req.URL.Scheme, req.URL.Host, req.URL.Path))
+
+	statusResponse := &MockResponse{}
+	formattedRequest, err := j.MockAPIRequest(req, statusResponse)
+	assert.Nil(t, err)
+	assert.Equal(t, "application/json, application/xml;q=0.9", formattedRequest.Header.Get("Accept"))
+
+	sentUsername, sentPwd, ok := formattedRequest.BasicAuth()
+	assert.False(t, ok)
+	assert.Equal(t, "", sentUsername)
+	assert.Equal(t, "", sentPwd)
+
+	// token tests
+	expired, err := j.AuthToken().IsExpired()
+	assert.Nil(t, err)
+	assert.False(t, expired)
+	assert.Equal(t, "eyJhbGciOiJIUzI1NiJ9.iam4fAKet3StTok3n", j.AuthToken().Token)
+	tokenAuthHeader := formattedRequest.Header.Get("Authorization")
+	assert.Equal(t, "Bearer eyJhbGciOiJIUzI1NiJ9.iam4fAKet3StTok3n", tokenAuthHeader)
 	assert.Equal(t, statusResponse.Status, "OK")
 }
 
