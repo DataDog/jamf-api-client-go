@@ -24,6 +24,7 @@ const (
 	policiesContext        = "policies"
 	scriptsContext         = "scripts"
 	maxAuthAttempts        = 3
+	computerGroupsContext  = "computergroups"
 )
 
 // Client represents the interface used to communicate with
