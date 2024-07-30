@@ -36,7 +36,7 @@ func computerGroupsResponseMocks(t *testing.T) *httptest.Server {
 							"is_smart": false
 					}]
 				}`)
-		case fmt.Sprintf("%s/id/1", COMPUTER_GROUPS_BASE_API_ENDPOINT), fmt.Sprintf("%s/id/-1", COMPUTER_GROUPS_BASE_API_ENDPOINT), fmt.Sprintf("%s/name/Test%sGroup%s1", COMPUTER_GROUPS_BASE_API_ENDPOINT, "%20", "%20"):
+		case fmt.Sprintf("%s/id/1", COMPUTER_GROUPS_BASE_API_ENDPOINT), fmt.Sprintf("%s/name/Test%sGroup%s1", COMPUTER_GROUPS_BASE_API_ENDPOINT, "%20", "%20"):
 			switch r.Method {
 			case "GET":
 				w.Header().Add("Content-Type", "application/xml")
@@ -72,7 +72,7 @@ func computerGroupsResponseMocks(t *testing.T) *httptest.Server {
 	}))
 }
 
-func TestListAllGroups(t *testing.T) {
+func TestListAllComputerGroups(t *testing.T) {
 	server := computerGroupsResponseMocks(t)
 	defer server.Close()
 	j, err := jamf.NewClient(server.URL, "test", "test", server.Client(), jamf.WithTokenAuth())
@@ -91,7 +91,7 @@ func TestListAllGroups(t *testing.T) {
 	assert.Equal(t, false, grps[2].IsSmart)
 }
 
-func TestQuerySpecificGroups(t *testing.T) {
+func TestQuerySpecificComputerGroups(t *testing.T) {
 	server := computerGroupsResponseMocks(t)
 	defer server.Close()
 	j, err := jamf.NewClient(server.URL, "test", "test", server.Client(), jamf.WithTokenAuth())
