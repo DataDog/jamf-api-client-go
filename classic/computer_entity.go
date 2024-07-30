@@ -10,13 +10,6 @@ type Computers struct {
 	List []BasicComputerInfo `json:"computers"`
 }
 
-// ComputerGroup represents a group a device is a member of in Jamf
-type ComputerGroup struct {
-	ID      int    `json:"id,omitempty" xml:"id,omitempty"`
-	Name    string `json:"name" xml:"name"`
-	IsSmart bool   `json:"is_smart" xml:"is_smart,omitempty"`
-}
-
 // BasicComputerInfo represents the information returned in a list of all computers from Jamf
 type BasicComputerInfo struct {
 	GeneralInformation
