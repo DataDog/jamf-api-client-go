@@ -17,11 +17,12 @@ type ComputerGroup struct {
 type BasicComputerGroupInfo struct {
 	ID      int    `json:"id,omitempty" xml:"id,omitempty"`
 	Name    string `json:"name,omitempty" xml:"name"`
-	IsSmart bool   `json:"is_smart" xml:"is_smart,omitempty"`
+	IsSmart bool   `json:"is_smart" xml:"is_smart"`
 }
 
 // ComputerGroupDetails represents the detailed information for a specific computer group
 type ComputerGroupDetails struct {
+	XMLName xml.Name `json:"computer_group" xml:"computer_group,omitempty"`
 	BasicComputerGroupInfo
 	Computers []BasicComputerInfo `json:"computers" xml:"computers>computer,omitempty"`
 }

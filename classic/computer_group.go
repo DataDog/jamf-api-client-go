@@ -68,3 +68,51 @@ func (j *Client) UpdateComputerGroupMembers(identifier any, updates *ComputerGro
 
 	return &res, nil
 }
+
+func (j *Client) CreateComputerGroup(newGroup *ComputerGroupDetails) (*ComputerGroupDetails, error) {
+	ep, err := EndpointBuilder(j.Endpoint, computerGroupsContext, -1)
+	if err != nil {
+		return nil, errors.Wrap(err, "error building JAMF add computer group request endpoint")
+	}
+
+	if newGroup.Name == "" {
+		return nil, errors.New("error building JAMF add computer group request: group name is required")
+	}
+
+	bodyContent, err := xml.Marshal(newGroup)
+	if err != nil {
+		return nil, errors.Wrap(err, "error building JAMF add computer group payload")
+	}
+
+	body := bytes.NewReader(bodyContent)
+	req, err := http.NewRequestWithContext(context.Background(), "POST", ep, body)
+	if err != nil {
+		return nil, errors.Wrapf(err, "error building JAMF add computer group request")
+	}
+
+	res := ComputerGroupDetails{}
+	if err := j.makeAPIrequest(req, &res); err != nil {
+		return nil, errors.Wrap(err, "unable to process JAMF add computer group request")
+	}
+
+	return &res, nil
+}
+
+func (j *Client) DeleteComputerGroup(identifier any) (*ComputerGroupDetails, error) {
+	ep, err := EndpointBuilder(j.Endpoint, computerGroupsContext, identifier)
+	if err != nil {
+		return nil, errors.Wrapf(err, "error building JAMF delete computer group request endpoint for group: %v", identifier)
+	}
+
+	req, err := http.NewRequestWithContext(context.Background(), "DELETE", ep, nil)
+	if err != nil {
+		return nil, errors.Wrapf(err, "error building JAMF delete computer group request for group: %v", identifier)
+	}
+
+	res := ComputerGroupDetails{}
+	if err := j.makeAPIrequest(req, &res); err != nil {
+		return nil, errors.Wrapf(err, "unable to process JAMF delete computer group request for group: %v", identifier)
+	}
+
+	return &res, nil
+}
