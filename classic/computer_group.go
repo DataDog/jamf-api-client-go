@@ -79,7 +79,7 @@ func (j *Client) CreateComputerGroup(newGroup *ComputerGroupDetails) (*ComputerG
 		return nil, errors.New("error building JAMF add computer group request: group name is required")
 	}
 
-	bodyContent, err := xml.MarshalIndent(newGroup, "", "    ")
+	bodyContent, err := xml.Marshal(newGroup)
 	if err != nil {
 		return nil, errors.Wrap(err, "error building JAMF add computer group payload")
 	}
@@ -108,6 +108,7 @@ func (j *Client) DeleteComputerGroup(identifier any) (*ComputerGroupDetails, err
 	if err != nil {
 		return nil, errors.Wrapf(err, "error building JAMF delete computer group request for group: %v", identifier)
 	}
+
 	res := ComputerGroupDetails{}
 	if err := j.makeAPIrequest(req, &res); err != nil {
 		return nil, errors.Wrapf(err, "unable to process JAMF delete computer group request for group: %v", identifier)
