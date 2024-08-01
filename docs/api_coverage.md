@@ -19,7 +19,7 @@
     - [x] Update computer by [ID](https://developer.jamf.com/jamf-pro/reference/updatecomputerbyid) or [Name](https://developer.jamf.com/jamf-pro/reference/updatecomputerbyname)
 
   - `/computerGroups`
-    - [x] [Create a new computer group](https://developer.jamf.com/jamf-pro/reference/findcomputergroups)
+    - [x] [Create a new computer group](https://developer.jamf.com/jamf-pro/reference/createcomputergroupbyid)
     - [x] Delete specific computer group by [ID](https://developer.jamf.com/jamf-pro/reference/deletecomputergroupbyid) or [first computer group by Name](https://developer.jamf.com/jamf-pro/reference/deletecomputergroupbyname)
     - [x] [Get all computer groups](https://developer.jamf.com/jamf-pro/reference/findcomputergroups)
     - [x] Update computer group members by [ID](https://developer.jamf.com/jamf-pro/reference/updatecomputergroupbyid) or [Name](https://developer.jamf.com/jamf-pro/reference/updatecomputergroupbyname)
