@@ -14,7 +14,7 @@
     - [x] Delete computer extension attribute by [ID](https://developer.jamf.com/jamf-pro/reference/deletecomputerextensionattributebyid) or [Name](https://developer.jamf.com/jamf-pro/reference/deletecomputerextensionattributebyname)
 
   - `/computers`
-    - [x] [Get all computers](https://developer.jamf.com/jamf-pro/reference/createcomputergroupbyid)
+    - [x] [Get all computers](https://developer.jamf.com/jamf-pro/reference/findcomputers)
     - [x] Get specific computer by [ID](https://developer.jamf.com/jamf-pro/reference/findcomputersbyid) or [first computer by Name](https://developer.jamf.com/jamf-pro/reference/findcomputersbyname)
     - [x] Update computer by [ID](https://developer.jamf.com/jamf-pro/reference/updatecomputerbyid) or [Name](https://developer.jamf.com/jamf-pro/reference/updatecomputerbyname)
 
