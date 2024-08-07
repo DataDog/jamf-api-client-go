@@ -20,6 +20,7 @@ import (
 const (
 	classesContext         = "classes"
 	computersContext       = "computers"
+	computerGroupsContext  = "computergroups"
 	computerExtAttrContext = "computerextensionattributes"
 	policiesContext        = "policies"
 	scriptsContext         = "scripts"

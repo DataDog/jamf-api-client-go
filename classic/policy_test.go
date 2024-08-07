@@ -138,7 +138,7 @@ func TestUpdatePolicy(t *testing.T) {
 			Name: "Test Policy",
 		},
 		Scope: &jamf.Scope{
-			ComputerGroups: []*jamf.ComputerGroup{
+			ComputerGroups: []*jamf.BasicComputerGroupInfo{
 				{
 					Name: "Test Smart Group",
 				},

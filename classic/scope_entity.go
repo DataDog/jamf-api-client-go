@@ -5,14 +5,14 @@ package classic
 
 // Scope represents the scope of a related Jamf configuration setting or Policy
 type Scope struct {
-	AllComputers   bool                  `json:"all_computers" xml:"all_computers,omitempty"`
-	Computers      []*BasicComputerInfo  `json:"computers" xml:"computers>computer,omitempty"`
-	ComputerGroups []*ComputerGroup      `json:"computer_groups" xml:"computer_groups>computer_group,omitempty"`
-	Buildings      []*Building           `json:"buildings" xml:"buildings,omitempty"`
-	Departments    []*Department         `json:"departments" xml:"departments,omitempty"`
-	LimitToUsers   *UserGroupLimitations `json:"limit_to_users" xml:"limit_to_users,omitempty"`
-	Limitations    *Limitations          `json:"limitations" xml:"limitations,omitempty"`
-	Exclusions     *Exclusions           `json:"exclusions" xml:"exclusions,omitempty"`
+	AllComputers   bool                      `json:"all_computers" xml:"all_computers,omitempty"`
+	Computers      []*BasicComputerInfo      `json:"computers" xml:"computers>computer,omitempty"`
+	ComputerGroups []*BasicComputerGroupInfo `json:"computer_groups" xml:"computer_groups>computer_group,omitempty"`
+	Buildings      []*Building               `json:"buildings" xml:"buildings,omitempty"`
+	Departments    []*Department             `json:"departments" xml:"departments,omitempty"`
+	LimitToUsers   *UserGroupLimitations     `json:"limit_to_users" xml:"limit_to_users,omitempty"`
+	Limitations    *Limitations              `json:"limitations" xml:"limitations,omitempty"`
+	Exclusions     *Exclusions               `json:"exclusions" xml:"exclusions,omitempty"`
 }
 
 // Building represents a building configured in Jamf that a setting can be scoped to
