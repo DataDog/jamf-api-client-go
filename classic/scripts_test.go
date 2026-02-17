@@ -55,18 +55,18 @@ func scriptsResponseMocks(t *testing.T) *httptest.Server {
 			case "PUT", "POST":
 				data, err := ioutil.ReadAll(r.Body)
 				if err != nil {
-					fmt.Fprintf(w, err.Error())
+					fmt.Fprint(w, err.Error())
 				}
 				scriptContents := &jamf.ScriptContents{}
 				err = xml.Unmarshal(data, scriptContents)
 				if err != nil {
-					fmt.Fprintf(w, err.Error())
+					fmt.Fprint(w, err.Error())
 				}
 				scriptData, err := json.MarshalIndent(scriptContents, "", "    ")
 				if err != nil {
-					fmt.Fprintf(w, err.Error())
+					fmt.Fprint(w, err.Error())
 				}
-				fmt.Fprintf(w, string(scriptData))
+				fmt.Fprint(w, string(scriptData))
 			default:
 				mockScript := &jamf.Script{
 					Content: &jamf.ScriptContents{
@@ -86,15 +86,15 @@ func scriptsResponseMocks(t *testing.T) *httptest.Server {
 				if r.Method == "DELETE" {
 					scriptData, err = json.MarshalIndent(mockScript.Content, "", "    ")
 					if err != nil {
-						fmt.Fprintf(w, err.Error())
+						fmt.Fprint(w, err.Error())
 					}
 				} else {
 					scriptData, err = json.MarshalIndent(mockScript, "", "    ")
 					if err != nil {
-						fmt.Fprintf(w, err.Error())
+						fmt.Fprint(w, err.Error())
 					}
 				}
-				fmt.Fprintf(w, string(scriptData))
+				fmt.Fprint(w, string(scriptData))
 			}
 		default:
 			http.Error(w, fmt.Sprintf("bad Jamf API %s call to %s", r.Method, r.URL), http.StatusInternalServerError)
