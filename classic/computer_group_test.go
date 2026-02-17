@@ -60,25 +60,25 @@ func computerGroupsResponseMocks(t *testing.T) *httptest.Server {
 				}
 				groupData, err := xml.MarshalIndent(mockGroup, "", "  ")
 				if err != nil {
-					fmt.Fprintf(w, err.Error())
+					fmt.Fprint(w, err.Error())
 				}
-				fmt.Fprintf(w, string(groupData))
+				fmt.Fprint(w, string(groupData))
 			case "POST":
 				w.Header().Add("Content-Type", "application/xml")
 				data, err := io.ReadAll(r.Body)
 				if err != nil {
-					fmt.Fprintf(w, err.Error())
+					fmt.Fprint(w, err.Error())
 				}
 				groupContents := &jamf.ComputerGroupDetails{}
 				err = xml.Unmarshal(data, groupContents)
 				if err != nil {
-					fmt.Fprintf(w, err.Error())
+					fmt.Fprint(w, err.Error())
 				}
 				groupData, err := xml.MarshalIndent(groupContents, "", "  ")
 				if err != nil {
-					fmt.Fprintf(w, err.Error())
+					fmt.Fprint(w, err.Error())
 				}
-				fmt.Fprintf(w, string(groupData))
+				fmt.Fprint(w, string(groupData))
 			default:
 				w.Header().Add("Content-Type", "application/xml")
 				mockGroup := &jamf.ComputerGroupDetails{
@@ -98,9 +98,9 @@ func computerGroupsResponseMocks(t *testing.T) *httptest.Server {
 				}
 				groupData, err := xml.MarshalIndent(mockGroup, "", "  ")
 				if err != nil {
-					fmt.Fprintf(w, err.Error())
+					fmt.Fprint(w, err.Error())
 				}
-				fmt.Fprintf(w, string(groupData))
+				fmt.Fprint(w, string(groupData))
 			}
 		default:
 			http.Error(w, fmt.Sprintf("bad Jamf API %s call to %s", r.Method, r.URL), http.StatusInternalServerError)

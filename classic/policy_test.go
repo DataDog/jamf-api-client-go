@@ -53,20 +53,20 @@ func policiesResponseMocks(t *testing.T) *httptest.Server {
 				w.Header().Add("Content-Type", "application/xml")
 				data, err := ioutil.ReadAll(r.Body)
 				if err != nil {
-					fmt.Fprintf(w, err.Error())
+					fmt.Fprint(w, err.Error())
 				}
 
 				policyContents := &jamf.PolicyContents{}
 				err = xml.Unmarshal(data, policyContents)
 				if err != nil {
-					fmt.Fprintf(w, err.Error())
+					fmt.Fprint(w, err.Error())
 				}
 
 				policyData, err := xml.MarshalIndent(policyContents, "", "    ")
 				if err != nil {
-					fmt.Fprintf(w, err.Error())
+					fmt.Fprint(w, err.Error())
 				}
-				fmt.Fprintf(w, string(policyData))
+				fmt.Fprint(w, string(policyData))
 			default:
 				mockPolicy := &jamf.Policy{
 					Content: &jamf.PolicyContents{
@@ -78,9 +78,9 @@ func policiesResponseMocks(t *testing.T) *httptest.Server {
 				}
 				policyData, err := json.MarshalIndent(mockPolicy, "", "    ")
 				if err != nil {
-					fmt.Fprintf(w, err.Error())
+					fmt.Fprint(w, err.Error())
 				}
-				fmt.Fprintf(w, string(policyData))
+				fmt.Fprint(w, string(policyData))
 			}
 		default:
 			http.Error(w, fmt.Sprintf("bad Jamf API %s call to %s", r.Method, r.URL), http.StatusInternalServerError)

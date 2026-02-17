@@ -43,18 +43,18 @@ func computerExtAttrResponseMocks(t *testing.T) *httptest.Server {
 			case "PUT", "POST":
 				data, err := ioutil.ReadAll(r.Body)
 				if err != nil {
-					fmt.Fprintf(w, err.Error())
+					fmt.Fprint(w, err.Error())
 				}
 				compExtAttrContents := &jamf.ComputerExtensionAttribute{}
 				err = xml.Unmarshal(data, compExtAttrContents)
 				if err != nil {
-					fmt.Fprintf(w, err.Error())
+					fmt.Fprint(w, err.Error())
 				}
 				compExtData, err := json.MarshalIndent(compExtAttrContents, "", "    ")
 				if err != nil {
-					fmt.Fprintf(w, err.Error())
+					fmt.Fprint(w, err.Error())
 				}
-				fmt.Fprintf(w, string(compExtData))
+				fmt.Fprint(w, string(compExtData))
 			default:
 				mockCompExtAttr := &jamf.ComputerExtensionAttributeDetails{
 					Details: &jamf.ComputerExtensionAttribute{
@@ -79,16 +79,16 @@ func computerExtAttrResponseMocks(t *testing.T) *httptest.Server {
 				if r.Method == "DELETE" {
 					compExtData, err = json.MarshalIndent(mockCompExtAttr.Details, "", "    ")
 					if err != nil {
-						fmt.Fprintf(w, err.Error())
+						fmt.Fprint(w, err.Error())
 					}
 				} else {
 					compExtData, err = json.MarshalIndent(mockCompExtAttr, "", "    ")
 					if err != nil {
-						fmt.Fprintf(w, err.Error())
+						fmt.Fprint(w, err.Error())
 					}
 				}
 
-				fmt.Fprintf(w, string(compExtData))
+				fmt.Fprint(w, string(compExtData))
 			}
 		default:
 			http.Error(w, fmt.Sprintf("bad Jamf API %s call to %s", r.Method, r.URL), http.StatusInternalServerError)
