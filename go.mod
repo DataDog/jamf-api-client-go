@@ -2,6 +2,8 @@ module github.com/DataDog/jamf-api-client-go
 
 go 1.25.7
 
+toolchain go1.26.2
+
 require (
 	github.com/pkg/errors v0.9.1
 	github.com/sirupsen/logrus v1.9.4
